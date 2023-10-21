@@ -1,0 +1,1 @@
+CREATE TABLE `user` (  `id` INTEGER PRIMARY KEY,  `username` varchar(255) NOT NULL,  `password` varchar(255) NOT NULL,  `name` varchar(255) NOT NULL,  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP)

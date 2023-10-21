@@ -1,0 +1,1 @@
+CREATE TABLE `tip` (  `id` integer PRIMARY KEY AUTOINCREMENT,  `tip_id` numeric NOT NULL,  `unit_id` numeric NOT NULL,  `content_id` numeric NOT NULL,  `title` text,  `content` text,  `state` numeric,  `long_date` numeric,  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP)

@@ -1,0 +1,1 @@
+CREATE TABLE `canned_message` (  `id` integer PRIMARY KEY AUTOINCREMENT,  `canned_id` numeric NOT NULL,  `message_level` numeric NOT NULL,  `message` text,  `state` numeric,  `long_date` numeric,  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP)
