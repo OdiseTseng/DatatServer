@@ -32,11 +32,11 @@ public class SessionController {
                 return ServerCode.SESSION_HAS_EXPIRED;
             } else {
                 // HttpSession is still active
-                return ServerCode.SESSION_ACTIVED;
+                return ServerCode.SESSION_ACTIVE;
             }
         } else {
             // HttpSession doesn't exist or is new (expired)
-            return ServerCode.SESSION_DOESNT_EXIST;
+            return ServerCode.SESSION_NOT_EXIST;
         }
     }
 }

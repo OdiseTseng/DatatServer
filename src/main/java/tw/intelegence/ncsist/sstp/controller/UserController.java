@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 import tw.intelegence.ncsist.sstp.bean.User;
+import tw.intelegence.ncsist.sstp.model.MsgDTO;
+import tw.intelegence.ncsist.sstp.model.NettyDTO;
 import tw.intelegence.ncsist.sstp.model.UserDTO;
+import tw.intelegence.ncsist.sstp.netty.controller.ConnectController;
 import tw.intelegence.ncsist.sstp.service.UserService;
 import tw.intelegence.ncsist.sstp.utils.func.CommonFunction;
 import tw.intelegence.ncsist.sstp.utils.func.SHAEncoder;
 import tw.intelegence.ncsist.sstp.utils.text.CommonString;
+import tw.intelegence.ncsist.sstp.utils.text.NettyCode;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -98,6 +102,19 @@ public class UserController {
 
 			System.out.println("user : " + user.getUsername());
 			System.out.println("level : " + user.getLevel());
+
+			MsgDTO msgDTO = new MsgDTO();
+			msgDTO.setCmd(NettyCode.CMD_LOGIN);
+			msgDTO.setFrom(user.getName());
+
+			String sourceIp = request.getRemoteAddr();
+			System.out.println("ip : " + sourceIp);
+//			sourceIp = sourceIp.split(":")[0];
+			sourceIp = "/" + sourceIp;
+			System.out.println("new ip : " + sourceIp);
+			
+
+			ConnectController.sendClientsMsg(sourceIp, msgDTO);
 
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user.getUsername());

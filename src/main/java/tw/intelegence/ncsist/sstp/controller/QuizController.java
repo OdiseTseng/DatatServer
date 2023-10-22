@@ -37,8 +37,8 @@ public class QuizController {
 
 			long quizId = 0L;
 			Quiz quiz = new Quiz();
-			quiz.setQuizId(createId(quizId));
-			quiz.setUnitId(newId);
+			quiz.setUnitId(2023001L);
+			quiz.setQuizId(newId);
 			quiz.setTitle("測驗操作");
 			quiz.setContent("請根據應用程式上的指示，完成操作並回答以下是非題");
 			quiz.setTofQuiz(0L);
@@ -49,7 +49,9 @@ public class QuizController {
 
 			quizService.saveQuiz(quiz);
 
-			quiz.setQuizId(createId(quizId));
+			newId = createId(newId);
+
+			quiz.setQuizId(2023001L);
 			quiz.setUnitId(newId);
 			quiz.setTitle("測驗操作");
 			quiz.setContent("請問剛剛進來前須先選擇課程是否正確?");
@@ -61,7 +63,9 @@ public class QuizController {
 
 			quizService.saveQuiz(quiz);
 
-			quiz.setQuizId(createId(quizId));
+			newId = createId(newId);
+
+			quiz.setQuizId(2023001L);
 			quiz.setUnitId(newId);
 			quiz.setTitle("信號搜索測驗");
 			quiz.setContent("偵搜車到達現場時，通訊兵打開搜索系統，經過搜索後，請問最可疑的無人機訊號可能是??");
@@ -73,7 +77,7 @@ public class QuizController {
 
 			quizService.saveQuiz(quiz);
 
-			quiz.setQuizId(createId(quizId));
+			quiz.setQuizId(2023002L);
 			quiz.setUnitId(newId);
 			quiz.setTitle("信號搜索是非題");
 			quiz.setContent("請問操作上是否可以不聽從長官指示自行調整截收準位?");

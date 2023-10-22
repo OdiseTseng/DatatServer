@@ -36,17 +36,47 @@ public class ContentController {
 			long newId = createId(0L);
 
 			Content content = new Content();
-			content.setUnitId(2023001L);
+			content.setUnitId(2023002L);
 			content.setContentId(newId);
-//			content.setContent();
-//			content.setContentOrder();
-//			content.setQuizList("");
+			content.setContent("搜索頻率範圍");
+			content.setContentOrder(1L);
+			content.setQuizList("");
 //			content.setGroup1();
 //			content.setGroup2();
 //			content.setGroup3();
 //			content.setGroup4();
 			content.setState(1L);
 			content.setLongDate(longDate);
+
+			contentService.saveContent(content);
+
+			content.setUnitId(2023002L);
+			content.setContentId(newId);
+			content.setContent("剔除信號參數");
+			content.setContentOrder(2L);
+			content.setQuizList("");
+//			content.setGroup1();
+//			content.setGroup2();
+//			content.setGroup3();
+//			content.setGroup4();
+			content.setState(1L);
+			content.setLongDate(longDate);
+
+			contentService.saveContent(content);
+
+			content.setUnitId(2023002L);
+			content.setContentId(newId);
+			content.setContent("截收準位");
+			content.setContentOrder(3L);
+			content.setQuizList("");
+//			content.setGroup1();
+//			content.setGroup2();
+//			content.setGroup3();
+//			content.setGroup4();
+			content.setState(1L);
+			content.setLongDate(longDate);
+
+			contentService.saveContent(content);
 
 			message = "初始化內容列表完成";
 		}
