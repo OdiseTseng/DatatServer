@@ -12,4 +12,8 @@ public class MsgDTO implements Serializable {
 	private String from;
 
 	private String msg;
+
+	private long level;
+
+	private int team;
 }

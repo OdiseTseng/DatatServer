@@ -13,7 +13,7 @@ public class NettyDTO implements Serializable {
 
 	private String name;
 
-	private String level;
+	private Long level;
 
 	private String ip;
 

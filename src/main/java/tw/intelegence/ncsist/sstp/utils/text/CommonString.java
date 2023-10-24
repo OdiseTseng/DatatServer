@@ -88,23 +88,4 @@ public class CommonString {
 	public static final String MSG_LOGIN_FAIL_CHECK = "請檢查帳號或密碼是否正確?";
 	public static final String MSG_TRANS_LATER = "稍後跳轉";
 	public static final String MSG_SESSION_TIMEOUT = "請重新登入";
-
-	//INFO
-	public static final String INFO = "INFO";
-	public static final String INFO_SERVER_CONNECTED = "INFO_SERVER_CONNECTED";
-	public static final String INFO_CLIENT_CONNECTED = "INFO_CLIENT_CONNECTED";
-	public static final String INFO_LOGIN_FAIL = "INFO_LOGIN_FAIL";
-	public static final String INFO_LOGIN_SUCCESS = "INFO_LOGIN_SUCCESS";
-	public static final String INFO_LOGIN_REMIND = "INFO_LOGIN_REMIND";
-	public static final String INFO_LOGOUT_REMIND = "INFO_LOGOUT_REMIND";
-	public static final String INFO_SESSION_TIMEOUT = "INFO_SESSION_TIMEOUT";
-
-	//CMD
-	public static final String CMD = "CMD";
-	public static final String CMD_CONNECTED = "CMD_CONNECTED";
-	public static final String CMD_DISCONNECT = "CMD_DISCONNECT";
-	public static final String CMD_LOGIN = "CMD_LOGIN";
-	public static final String CMD_LOGOUT = "CMD_LOGOUT";
-	public static final String CMD_SESSION_GET = "CMD_SESSION_GET";
-	public static final String CMD_SESSION_CLEAR = "CMD_SESSION_CLEAR";
 }

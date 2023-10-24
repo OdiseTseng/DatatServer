@@ -81,12 +81,12 @@ public class UserBackController {
 				session.setAttribute("user", user.getUsername());
 				session.setAttribute( "level", user.getLevel());
 
-				return CommonFunction.setResponse( CommonString.INFO_LOGIN_SUCCESS , name);
+				return CommonFunction.setResponse( "INFO_LOGIN_SUCCESS" , name);
 			}else{
-				return CommonFunction.setResponse( CommonString.INFO_LOGIN_FAIL, CommonString.MSG_LOGIN_FAIL_CHECK);
+				return CommonFunction.setResponse( "INFO_LOGIN_FAIL", CommonString.MSG_LOGIN_FAIL_CHECK);
 			}
 		}
-		return CommonFunction.setResponse( CommonString.INFO_LOGIN_FAIL ,CommonString.MSG_LOGIN_FAIL_CHECK);
+		return CommonFunction.setResponse( "INFO_LOGIN_FAIL" ,CommonString.MSG_LOGIN_FAIL_CHECK);
 	}
 
 	@Operation(summary = "取得所有使用者", description = "")

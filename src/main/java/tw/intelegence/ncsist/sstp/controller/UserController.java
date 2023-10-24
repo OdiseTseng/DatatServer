@@ -7,17 +7,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.intelegence.ncsist.sstp.bean.User;
 import tw.intelegence.ncsist.sstp.model.MsgDTO;
 import tw.intelegence.ncsist.sstp.model.NettyDTO;
 import tw.intelegence.ncsist.sstp.model.UserDTO;
 import tw.intelegence.ncsist.sstp.netty.controller.ConnectController;
+import tw.intelegence.ncsist.sstp.netty.service.NettyService;
 import tw.intelegence.ncsist.sstp.service.UserService;
 import tw.intelegence.ncsist.sstp.utils.func.CommonFunction;
 import tw.intelegence.ncsist.sstp.utils.func.SHAEncoder;
 import tw.intelegence.ncsist.sstp.utils.text.CommonString;
 import tw.intelegence.ncsist.sstp.utils.text.NettyCode;
+import tw.intelegence.ncsist.sstp.utils.text.ServerCode;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -58,13 +62,52 @@ public class UserController {
 //		userService.save(user);
 			userService.updateUser(user);
 
-			//學生
+			//指揮
 			user.setUsername("2");
 			user.setPassword(SHAEncoder.getSHA256("2"));
 			user.setName("002");
 			user.setLevel(1003L);
-			user.setIp("192.168.50.46");
+			user.setIp("192.168.50.47");
 			user.setStudentId(2075002L);
+			user.setStudentBatch(2023001L);
+			user.setState(1L);
+			user.setLongDate(longDate);
+//		userService.save(user);
+			userService.updateUser(user);
+
+			//學生
+			user.setUsername("3");
+			user.setPassword(SHAEncoder.getSHA256("3"));
+			user.setName("003");
+			user.setLevel(1004L);
+			user.setIp("192.168.50.48");
+			user.setStudentId(2075003L);
+			user.setStudentBatch(2023001L);
+			user.setState(1L);
+			user.setLongDate(longDate);
+//		userService.save(user);
+			userService.updateUser(user);
+
+			//學生
+			user.setUsername("4");
+			user.setPassword(SHAEncoder.getSHA256("4"));
+			user.setName("004");
+			user.setLevel(1004L);
+			user.setIp("192.168.50.49");
+			user.setStudentId(2075004L);
+			user.setStudentBatch(2023001L);
+			user.setState(1L);
+			user.setLongDate(longDate);
+//		userService.save(user);
+			userService.updateUser(user);
+
+			//學生
+			user.setUsername("5");
+			user.setPassword(SHAEncoder.getSHA256("5"));
+			user.setName("005");
+			user.setLevel(1004L);
+			user.setIp("192.168.50.50");
+			user.setStudentId(2075005L);
 			user.setStudentBatch(2023001L);
 			user.setState(1L);
 			user.setLongDate(longDate);
@@ -85,7 +128,7 @@ public class UserController {
 //	public String doLogin(HttpServletRequest request, @RequestBody(description = "Map containing username and password", required = true,
 //			content = @Content(schema = @Schema(implementation = Map.class))) Map<String, String> map){
 
-	public String doLogin(HttpServletRequest request, @RequestBody UserDTO userDTO){
+	public ResponseEntity<?> doLogin(HttpServletRequest request, @RequestBody UserDTO userDTO){
 
 		System.out.println("userDTO: " + userDTO.toString());
 		String username = userDTO.getUsername();
@@ -107,22 +150,35 @@ public class UserController {
 			msgDTO.setCmd(NettyCode.CMD_LOGIN);
 			msgDTO.setFrom(user.getName());
 
+			NettyDTO nettyDTO = new NettyDTO();
+			nettyDTO.setUsername(user.getUsername());
+			nettyDTO.setName(user.getName());
+			nettyDTO.setLevel(user.getLevel());
+			nettyDTO.setIp(user.getIp());
+			nettyDTO.setStudentId(user.getStudentId());
+			nettyDTO.setStudentBatch(user.getStudentBatch());
+
 			String sourceIp = request.getRemoteAddr();
 			System.out.println("ip : " + sourceIp);
 //			sourceIp = sourceIp.split(":")[0];
-			sourceIp = "/" + sourceIp;
+//			sourceIp = "/" + sourceIp;
 			System.out.println("new ip : " + sourceIp);
-			
-
-			ConnectController.sendClientsMsg(sourceIp, msgDTO);
 
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user.getUsername());
 			session.setAttribute( "level", user.getLevel());
 
-			return CommonFunction.setResponse( CommonString.INFO_LOGIN_SUCCESS , user.getName());
+			String sourceId = userDTO.getCtx();
+			System.out.println("sourceId : " + sourceId);
+
+			ConnectController.setIdIpNettyDTO_Demo(sourceId, sourceIp, nettyDTO);
+
+			NettyService.sendClientsMsg_Demo(sourceId, sourceIp, msgDTO);
+
+//			return CommonFunction.setResponse( ServerCode.INFO_LOGIN_SUCCESS , nettyDTO.toString());
+			return ResponseEntity.ok(nettyDTO);
 		}else{
-			return CommonFunction.setResponse( CommonString.INFO_LOGIN_FAIL, CommonString.MSG_LOGIN_FAIL_CHECK);
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ServerCode.INFO_LOGIN_FAIL);
 		}
 	}
 
