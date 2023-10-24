@@ -14,18 +14,12 @@ import tw.intelegence.ncsist.sstp.bean.User;
 import tw.intelegence.ncsist.sstp.model.MsgDTO;
 import tw.intelegence.ncsist.sstp.model.NettyDTO;
 import tw.intelegence.ncsist.sstp.model.UserDTO;
-import tw.intelegence.ncsist.sstp.netty.controller.ConnectController;
-import tw.intelegence.ncsist.sstp.netty.service.NettyService;
+import tw.intelegence.ncsist.sstp.netty.controller.NettyMsgController;
 import tw.intelegence.ncsist.sstp.service.UserService;
-import tw.intelegence.ncsist.sstp.utils.func.CommonFunction;
 import tw.intelegence.ncsist.sstp.utils.func.SHAEncoder;
-import tw.intelegence.ncsist.sstp.utils.text.CommonString;
 import tw.intelegence.ncsist.sstp.utils.text.NettyCode;
 import tw.intelegence.ncsist.sstp.utils.text.ServerCode;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 
@@ -168,12 +162,14 @@ public class UserController {
 			session.setAttribute("user", user.getUsername());
 			session.setAttribute( "level", user.getLevel());
 
-			String sourceId = userDTO.getCtx();
+			String sourceId = userDTO.getCtxId();
 			System.out.println("sourceId : " + sourceId);
 
-			ConnectController.setIdIpNettyDTO_Demo(sourceId, sourceIp, nettyDTO);
+//			ConnectController.setIdIpNettyDTO_Demo(sourceId, sourceIp, nettyDTO);
+//			NettyService.sendClientsMsg_Demo(sourceId, sourceIp, msgDTO);
 
-			NettyService.sendClientsMsg_Demo(sourceId, sourceIp, msgDTO);
+			NettyMsgController.setIdNettyDTO(sourceId + "-" + sourceIp, nettyDTO, msgDTO);
+//			NettyService.sendClientsMsg(sourceId + "-" + sourceIp, msgDTO);
 
 //			return CommonFunction.setResponse( ServerCode.INFO_LOGIN_SUCCESS , nettyDTO.toString());
 			return ResponseEntity.ok(nettyDTO);

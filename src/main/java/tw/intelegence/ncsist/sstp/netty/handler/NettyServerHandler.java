@@ -1,34 +1,37 @@
 package tw.intelegence.ncsist.sstp.netty.handler;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import tw.intelegence.ncsist.sstp.netty.controller.ConnectController;
+import io.netty.util.CharsetUtil;
+import tw.intelegence.ncsist.sstp.netty.controller.NettyMsgController;
+import tw.intelegence.ncsist.sstp.netty.service.NettyTeamService;
 
-public class ServerHandler extends ChannelInboundHandlerAdapter {
+public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
-    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
-
+    public void channelRegistered(ChannelHandlerContext ctx) {
         String sourceIp = ctx.channel().remoteAddress().toString();
         System.out.println("sourceIp : " + sourceIp);
         sourceIp = sourceIp.replace("/", "");
         sourceIp = sourceIp.split(":")[0];
         System.out.println("new sourceIp : " + sourceIp);
-        String sourceId = ctx.channel().id().toString();
+        String sourceCtxId = ctx.channel().id().toString();
 
 //        if(ConnectController.chkIpExist(sourceIp)){
-        if(ConnectController.chkIpExist_Demo(sourceId, sourceIp)){
+//        if(ConnectController.chkIpExist_Demo(sourceCtxId, sourceIp)){
+//
+////            ConnectController.delAllByIp(sourceIp);
+//            ConnectController.delAll_Demo(sourceCtxId, sourceIp);
+//        }
+//            ConnectController.setNettyIpIdCtx(sourceIp, sourceCtxId, ctx);
+//        ConnectController.setNettyIpIdCtx_Demo("", sourceIp, sourceCtxId, ctx);
+        NettyMsgController.setNettyIdCtx(ctx, sourceCtxId);
 
-//            ConnectController.delAllByIp(sourceIp);
-            ConnectController.delAll_Demo(sourceId, sourceIp);
-        }
-//            ConnectController.setNettyIpIdCtx(sourceIp, sourceId, ctx);
-        ConnectController.setNettyIpIdCtx_Demo("", sourceIp, sourceId, ctx);
 
+        System.out.println("channelRegistered : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
 
-        System.out.println("channelRegistered : sourceId " + sourceId + " ; sourceIp : " + sourceIp);
-
-        super.channelRegistered(ctx);
+//        super.channelRegistered(ctx);
     }
 
     @Override
@@ -39,10 +42,12 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         sourceIp = sourceIp.replace("/", "");
         sourceIp = sourceIp.split(":")[0];
         System.out.println("new sourceIp : " + sourceIp);
-        String sourceId = ctx.channel().id().toString();
+        String sourceCtxId = ctx.channel().id().toString();
 
-        System.out.println("channelUnregistered : sourceId " + sourceId + " ; sourceIp : " + sourceIp);
-        super.channelUnregistered(ctx);
+        NettyMsgController.delIdNetty(sourceCtxId);
+
+        System.out.println("channelUnregistered : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
+//        super.channelUnregistered(ctx);
     }
 
     @Override
@@ -53,10 +58,10 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         sourceIp = sourceIp.replace("/", "");
         sourceIp = sourceIp.split(":")[0];
         System.out.println("new sourceIp : " + sourceIp);
-        String sourceId = ctx.channel().id().toString();
+        String sourceCtxId = ctx.channel().id().toString();
 
-        System.out.println("channelActive : sourceId " + sourceId + " ; sourceIp : " + sourceIp);
-        super.channelActive(ctx);
+        System.out.println("channelActive : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
+//        super.channelActive(ctx);
     }
 
     @Override
@@ -67,10 +72,10 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         sourceIp = sourceIp.replace("/", "");
         sourceIp = sourceIp.split(":")[0];
         System.out.println("new sourceIp : " + sourceIp);
-        String sourceId = ctx.channel().id().toString();
+        String sourceCtxId = ctx.channel().id().toString();
 
-        System.out.println("channelInactive : sourceId " + sourceId + " ; sourceIp : " + sourceIp);
-        super.channelInactive(ctx);
+        System.out.println("channelInactive : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
+//        super.channelInactive(ctx);
     }
 
     @Override
@@ -81,10 +86,30 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         sourceIp = sourceIp.replace("/", "");
         sourceIp = sourceIp.split(":")[0];
         System.out.println("new sourceIp : " + sourceIp);
-        String sourceId = ctx.channel().id().toString();
+        String sourceCtxId = ctx.channel().id().toString();
 
-        System.out.println("channelRead : sourceId " + sourceId + " ; sourceIp : " + sourceIp);
-        super.channelRead(ctx, msg);
+        ByteBuf byteBuf = (ByteBuf) msg;
+        String message = byteBuf.toString(CharsetUtil.UTF_8);
+
+//        NettyMsgController.
+//        getClientMsg();
+
+        int messageCode = Integer.parseInt(message);
+        int messageType = messageCode / 10000;
+        switch (messageType){
+            case 89:
+
+                break;
+            case 90:
+//                ConnectController.
+                break;
+            case 91:
+//                NettyMsgController.se(sourceCtxId, messageCode);
+                break;
+        }
+
+        System.out.println("channelRead : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp + " ; message : " + message);
+//        super.channelRead(ctx, msg);
     }
 
     @Override
@@ -95,10 +120,10 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         sourceIp = sourceIp.replace("/", "");
         sourceIp = sourceIp.split(":")[0];
         System.out.println("new sourceIp : " + sourceIp);
-        String sourceId = ctx.channel().id().toString();
+        String sourceCtxId = ctx.channel().id().toString();
 
-        System.out.println("channelReadComplete : sourceId " + sourceId + " ; sourceIp : " + sourceIp);
-        super.channelReadComplete(ctx);
+        System.out.println("channelReadComplete : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
+//        super.channelReadComplete(ctx);
     }
 
     @Override
@@ -109,10 +134,10 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         sourceIp = sourceIp.replace("/", "");
         sourceIp = sourceIp.split(":")[0];
         System.out.println("new sourceIp : " + sourceIp);
-        String sourceId = ctx.channel().id().toString();
+        String sourceCtxId = ctx.channel().id().toString();
 
-        System.out.println("userEventTriggered : sourceId " + sourceId + " ; sourceIp : " + sourceIp);
-        super.userEventTriggered(ctx, evt);
+        System.out.println("userEventTriggered : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
+//        super.userEventTriggered(ctx, evt);
     }
 
     @Override
@@ -123,10 +148,10 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         sourceIp = sourceIp.replace("/", "");
         sourceIp = sourceIp.split(":")[0];
         System.out.println("new sourceIp : " + sourceIp);
-        String sourceId = ctx.channel().id().toString();
+        String sourceCtxId = ctx.channel().id().toString();
 
-        System.out.println("exceptionCaught : sourceId " + sourceId + " ; sourceIp : " + sourceIp);
+        System.out.println("exceptionCaught : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
         System.out.println("exceptionCaught : " + cause.getMessage());
-        super.exceptionCaught(ctx, cause);
+//        super.exceptionCaught(ctx, cause);
     }
 }

@@ -9,11 +9,11 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
-import tw.intelegence.ncsist.sstp.netty.handler.ServerHandler;
+import tw.intelegence.ncsist.sstp.netty.handler.NettyServerHandler;
 
 import java.util.concurrent.TimeUnit;
 
-public class Server {
+public class NettyServer {
 
     public static void startServer(){
         //Create two thread group boosGroup、workerGroup
@@ -38,7 +38,7 @@ public class Server {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             //Give pipline setting processor.
-                            socketChannel.pipeline().addLast(new ServerHandler());
+                            socketChannel.pipeline().addLast(new NettyServerHandler());
                             socketChannel.pipeline().addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS));
                         }
                     });//给workerGroup的EventLoop對應的channel 設定 processor

@@ -2,25 +2,35 @@ package tw.intelegence.ncsist.sstp.utils.text;
 
 public class NettyCode {
 
+
+    //NORMAL
+    public static  final int CMD_NORMAL_MSG = 890001;
+    public static final String CMD_890001 = "CMD_NORMAL_MSG";
+
+
+    //CMD
     public static final int CMD_CONNECT = 900001;
     public static final String CMD_900001 = "CMD_CONNECT";
     public static  final int CMD_LOGIN = 900002;
     public static final String CMD_900002 = "CMD_LOGIN";
-
-    public static  final int CMD_NORMAL_MSG = 900003;
-    public static final String CMD_900003 = "CMD_NORMAL_MSG";
-
+    public static  final int CMD_LOGOUT = 900003;
+    public static final String CMD_900003 = "CMD_LOGOUT";
+    public static  final int CMD_DISCONNECT = 900004;
+    public static final String CMD_900004 = "CMD_DISCONNECT";
 
 
     //TEAM  -------------------------------------------------------------------------------
+    public static final int TEAM_WAITING_UPDATE = 910000;
+    public static final String TEAM_910000 = "TEAM_WAITING_UPDATE";
+
     public static final int TEAM_WAITING_WAIT = 910001;
-    public static final String TEAM_91001 = "TEAM_WAITING_WAIT";
+    public static final String TEAM_910001 = "TEAM_WAITING_WAIT";
 
     public static  final int TEAM_WAITING_WAIT_TIMEOUT = 910002;
-    public static final String TEAM_91002 = "TEAM_WAITING_WAIT_TIMEOUT";
+    public static final String TEAM_910002 = "TEAM_WAITING_WAIT_TIMEOUT";
 
     public static  final int TEAM_WAITING_JOIN = 910003;
-    public static final String TEAM_91003 = "TEAM_WAITING_JOIN";
+    public static final String TEAM_910003 = "TEAM_WAITING_JOIN";
 
     public static  final int TEAM_WAITING_JOIN_FAIL = 910004;
     public static final String TEAM_910004 = "TEAM_WAITING_JOIN_FAIL";
