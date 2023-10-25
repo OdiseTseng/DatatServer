@@ -5,12 +5,14 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 import tw.intelegence.ncsist.sstp.netty.controller.NettyMsgController;
-import tw.intelegence.ncsist.sstp.netty.service.NettyTeamService;
 
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
+    NettyMsgController nettyMsgController = new NettyMsgController();
+
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) {
+        System.out.println("channelRegistered : ");
         String sourceIp = ctx.channel().remoteAddress().toString();
         System.out.println("sourceIp : " + sourceIp);
         sourceIp = sourceIp.replace("/", "");
@@ -26,17 +28,20 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 //        }
 //            ConnectController.setNettyIpIdCtx(sourceIp, sourceCtxId, ctx);
 //        ConnectController.setNettyIpIdCtx_Demo("", sourceIp, sourceCtxId, ctx);
-        NettyMsgController.setNettyIdCtx(ctx, sourceCtxId);
+
+        //for demo
+//        nettyMsgController.setNettyIdCtx(ctx, sourceCtxId + "-" + sourceIp);
+        nettyMsgController.setFirstNettyIdCtx(ctx, sourceCtxId);
 
 
-        System.out.println("channelRegistered : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
+        System.out.println("sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
 
 //        super.channelRegistered(ctx);
     }
 
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
-
+        System.out.println("channelUnregistered : ");
         String sourceIp = ctx.channel().remoteAddress().toString();
         System.out.println("sourceIp : " + sourceIp);
         sourceIp = sourceIp.replace("/", "");
@@ -44,7 +49,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         System.out.println("new sourceIp : " + sourceIp);
         String sourceCtxId = ctx.channel().id().toString();
 
-        NettyMsgController.delIdNetty(sourceCtxId);
+        nettyMsgController.delIdNetty(sourceCtxId);
 
         System.out.println("channelUnregistered : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
 //        super.channelUnregistered(ctx);
@@ -52,6 +57,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channelActive : ");
 
         String sourceIp = ctx.channel().remoteAddress().toString();
         System.out.println("sourceIp : " + sourceIp);
@@ -66,6 +72,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channelInactive : ");
 
         String sourceIp = ctx.channel().remoteAddress().toString();
         System.out.println("sourceIp : " + sourceIp);
@@ -76,10 +83,12 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
         System.out.println("channelInactive : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
 //        super.channelInactive(ctx);
+
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        System.out.println("channelRead : ");
 
         String sourceIp = ctx.channel().remoteAddress().toString();
         System.out.println("sourceIp : " + sourceIp);
@@ -91,22 +100,24 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         ByteBuf byteBuf = (ByteBuf) msg;
         String message = byteBuf.toString(CharsetUtil.UTF_8);
 
+        nettyMsgController.treatMsg(sourceCtxId, message);
+
 //        NettyMsgController.
 //        getClientMsg();
 
-        int messageCode = Integer.parseInt(message);
-        int messageType = messageCode / 10000;
-        switch (messageType){
-            case 89:
-
-                break;
-            case 90:
-//                ConnectController.
-                break;
-            case 91:
-//                NettyMsgController.se(sourceCtxId, messageCode);
-                break;
-        }
+//        int messageCode = Integer.parseInt(message);
+//        int messageType = messageCode / 10000;
+//        switch (messageType){
+//            case 89:
+//
+//                break;
+//            case 90:
+////                ConnectController.
+//                break;
+//            case 91:
+////                NettyMsgController.se(sourceCtxId, messageCode);
+//                break;
+//        }
 
         System.out.println("channelRead : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp + " ; message : " + message);
 //        super.channelRead(ctx, msg);
@@ -114,6 +125,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channelReadComplete : ");
 
         String sourceIp = ctx.channel().remoteAddress().toString();
         System.out.println("sourceIp : " + sourceIp);
@@ -128,6 +140,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        System.out.println("userEventTriggered : ");
 
         String sourceIp = ctx.channel().remoteAddress().toString();
         System.out.println("sourceIp : " + sourceIp);
@@ -142,6 +155,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        System.out.println("exceptionCaught : ");
 
         String sourceIp = ctx.channel().remoteAddress().toString();
         System.out.println("sourceIp : " + sourceIp);

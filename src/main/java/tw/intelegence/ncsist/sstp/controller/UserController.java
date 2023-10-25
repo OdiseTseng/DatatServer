@@ -168,8 +168,11 @@ public class UserController {
 //			ConnectController.setIdIpNettyDTO_Demo(sourceId, sourceIp, nettyDTO);
 //			NettyService.sendClientsMsg_Demo(sourceId, sourceIp, msgDTO);
 
-			NettyMsgController.setIdNettyDTO(sourceId + "-" + sourceIp, nettyDTO, msgDTO);
-//			NettyService.sendClientsMsg(sourceId + "-" + sourceIp, msgDTO);
+			//for demo
+//			new NettyMsgController().setIdNettyDTO(sourceId + "-" + sourceIp, nettyDTO, msgDTO);
+			new NettyMsgController().setIdNettyDTO(sourceId, nettyDTO, msgDTO);
+
+			//			NettyService.sendClientsMsg(sourceId + "-" + sourceIp, msgDTO);
 
 //			return CommonFunction.setResponse( ServerCode.INFO_LOGIN_SUCCESS , nettyDTO.toString());
 			return ResponseEntity.ok(nettyDTO);

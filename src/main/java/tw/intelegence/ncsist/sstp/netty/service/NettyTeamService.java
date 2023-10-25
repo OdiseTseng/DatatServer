@@ -94,4 +94,95 @@ public class NettyTeamService {
 
         return NettyCode.TEAM_WAITING_COACH_DISPATCH;
     }
+
+    public MsgDTO treatMsgDTO(int cmd, String sourceCtxId, String from, String msg){
+        MsgDTO msgDTO = new MsgDTO();
+        switch(cmd){
+            case NettyCode.TEAM_WAITING_UPDATE:                   //00
+                msgDTO.setCmd(NettyCode.CMD_NORMAL_OTHER_MSG);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_WAITING_WAIT:                   //01
+                msgDTO.setCmd(NettyCode.CMD_NORMAL_OTHER_MSG);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_WAITING_WAIT_TIMEOUT:           //02
+                msgDTO.setCmd(NettyCode.CMD_OTHER_CONNECT);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_WAITING_JOIN:                   //03
+                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_WAITING_JOIN_FAIL:              //04
+                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_WAITING_COACH_DISPATCH:         //05
+                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_WAITING_COACH_DISPATCH_FAIL:    //06
+                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_WAITING_NEXT:                   //07
+                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_COURSE_STEP_WAITING:            //08
+                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_COURSE_STEP_STARTING:           //09
+                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_COURSE_STEP_FINISH:             //10
+                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_COURSE_ALL_FINISH:              //11
+                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_COURSE_ALL_FAIL:                //12
+                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_COURSE_DEL_TEAM:                //13
+                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+        }
+
+        return msgDTO;
+    }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import tw.intelegence.ncsist.sstp.model.MsgDTO;
 import tw.intelegence.ncsist.sstp.model.NettyDTO;
+import tw.intelegence.ncsist.sstp.utils.text.NettyCode;
 
 public class NettyCommonService {
 
@@ -20,62 +21,32 @@ public class NettyCommonService {
         return msgDTO;
     }
 
-    public MsgDTO createMsgDTO(int cmdCode, String msg, String name, long level, int team){
+    public MsgDTO createMsgDTO(int cmdCode){
+        return createMsgDTO(cmdCode, "");
+    }
+
+    public MsgDTO createMsgDTO(int cmdCode, String msg){
+        return createMsgDTO(cmdCode, msg, "");
+    }
+
+    public MsgDTO createMsgDTO(int cmdCode, String msg, String fromName){
+        return createMsgDTO(cmdCode, msg, fromName, 0, 0);
+    }
+
+    public MsgDTO createMsgDTO(int cmdCode, String msg, String fromName, long level){
+        return createMsgDTO(cmdCode, msg, fromName, level, 0);
+    }
+
+    public MsgDTO createMsgDTO(int cmdCode, String msg, String fromName, long level, int team){
         MsgDTO msgDTO = new MsgDTO();
         msgDTO.setCmd(cmdCode);
         msgDTO.setMsg(msg);
-        msgDTO.setFrom(name);
+        msgDTO.setFrom(fromName);
         msgDTO.setLevel(level);
         msgDTO.setTeam(team);
 
         return msgDTO;
     }
-
-//    public static void sendClientsMsg_Demo(String sourceCtxId, String sourceIp, MsgDTO msgDTO){
-//        HashMap<String, NettyDTO> idNettyMaps = NettyService.getIdNettyMaps();
-//        HashMap<String, ChannelHandlerContext> idClients = NettyService.getIdClients();
-//        ObjectMapper objectMapper = NettyService.getObjectMapper();
-//
-//        System.out.println("sendClientsMsg_Demo ;; sourceCtxId : " + sourceCtxId + " ;; sourceIp : " + sourceIp);
-//        NettyDTO nettyDTO = idNettyMaps.get(sourceCtxId+"-" + sourceIp);
-//        System.out.println("sendClientsMsg_Demo ;; nettyDTO : " + nettyDTO.toString());
-//
-//        String msgJson;
-//        ChannelHandlerContext ctx;
-//
-//        try {
-//            msgJson = objectMapper.writeValueAsString(msgDTO);
-//        } catch (JsonProcessingException e) {
-//            System.out.println("JsonProcessingException : " + e.getMessage());
-//            throw new RuntimeException(e);
-//        }
-//
-//        System.out.println("msgJson : " + msgJson);
-//
-//
-//        for(String key: idClients.keySet()){
-//            System.out.println("idClients key : " + key);
-//            ctx = idClients.get(key);
-//
-//            ctx.writeAndFlush(Unpooled.copiedBuffer(msgJson, CharsetUtil.UTF_8));
-//        }
-//    }
-
-//    public static void sendClientMsg_Demo(String sourceCtxId, MsgDTO msgDTO){
-//        ObjectMapper objectMapper = NettyService.getObjectMapper();
-//        ChannelHandlerContext ctx = idClients.get(sourceCtxId);
-//
-//        String msgJson;
-//
-//        try {
-//            msgJson = objectMapper.writeValueAsString(msgDTO);
-//        } catch (JsonProcessingException e) {
-//            System.out.println("JsonProcessingException : " + e.getMessage());
-//            throw new RuntimeException(e);
-//        }
-//
-//        ctx.writeAndFlush(Unpooled.copiedBuffer(msgJson, CharsetUtil.UTF_8));
-//    }
 
     public NettyDTO toNettyDTO(String msg){
         NettyDTO nettyDTO;
@@ -88,16 +59,57 @@ public class NettyCommonService {
         return nettyDTO;
     }
 
-    public String parseDTOToMsgJson(Object objDTO){
-        String msgJson;
+    public String parseDTOToString(Object objDTO){
+        String msgString;
 
         try {
-            msgJson = objectMapper.writeValueAsString(objDTO);
+            msgString = objectMapper.writeValueAsString(objDTO);
         } catch (JsonProcessingException e) {
             System.out.println("JsonProcessingException : " + e.getMessage());
             throw new RuntimeException(e);
         }
 
-        return msgJson;
+        return msgString;
+    }
+
+    public MsgDTO treatMsgDTO(int cmd, String sourceCtxId, String from, String msg){
+
+        System.out.println("treatMsgDTO : cmd= " + cmd + " sourceCtxId= " + sourceCtxId+ " from= " + from + " msg= " + msg);
+
+        MsgDTO msgDTO = new MsgDTO();
+
+        switch(cmd){
+            case NettyCode.CMD_NORMAL_MSG:
+                msgDTO.setCmd(NettyCode.CMD_NORMAL_OTHER_MSG);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.CMD_CONNECT:
+                msgDTO.setCmd(NettyCode.CMD_OTHER_CONNECT);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.CMD_DISCONNECT:
+                msgDTO.setCmd(NettyCode.CMD_OTHER_DISCONNECT);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.CMD_LOGIN:
+                msgDTO.setCmd(NettyCode.CMD_OTHER_LOGIN);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.CMD_LOGOUT:
+                msgDTO.setCmd(NettyCode.CMD_OTHER_LOGOUT);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+        }
+
+        return msgDTO;
     }
 }

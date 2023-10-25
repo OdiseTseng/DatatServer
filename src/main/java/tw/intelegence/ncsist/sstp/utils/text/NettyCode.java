@@ -3,23 +3,39 @@ package tw.intelegence.ncsist.sstp.utils.text;
 public class NettyCode {
 
 
-    //NORMAL
+
+
+    //CMD NORMAL
+    public static final int CMD_NORMAL = 89;
     public static  final int CMD_NORMAL_MSG = 890001;
     public static final String CMD_890001 = "CMD_NORMAL_MSG";
 
+    public static  final int CMD_NORMAL_OTHER_MSG = 890002;
+    public static final String CMD_890002 = "CMD_NORMAL_OTHER_MSG";
 
     //CMD
+    public static final int CMD = 90;
     public static final int CMD_CONNECT = 900001;
     public static final String CMD_900001 = "CMD_CONNECT";
-    public static  final int CMD_LOGIN = 900002;
-    public static final String CMD_900002 = "CMD_LOGIN";
-    public static  final int CMD_LOGOUT = 900003;
-    public static final String CMD_900003 = "CMD_LOGOUT";
-    public static  final int CMD_DISCONNECT = 900004;
-    public static final String CMD_900004 = "CMD_DISCONNECT";
+    public static final int CMD_DISCONNECT = 900002;
+    public static final String CMD_900002 = "CMD_DISCONNECT";
+    public static  final int CMD_LOGIN = 900003;
+    public static final String CMD_900003 = "CMD_LOGIN";
+    public static final int CMD_LOGOUT = 900004;
+    public static final String CMD_900004 = "CMD_LOGOUT";
+
+    public static final int CMD_OTHER_CONNECT = 900005;
+    public static final String CMD_900005 = "CMD_OTHER_CONNECT";
+    public static final int CMD_OTHER_DISCONNECT = 900006;
+    public static final String CMD_900006 = "CMD_OTHER_DISCONNECT";
+    public static final int CMD_OTHER_LOGIN = 900007;
+    public static final String CMD_900007 = "CMD_OTHER_LOGIN";
+    public static final int CMD_OTHER_LOGOUT = 900008;
+    public static final String CMD_900008 = "CMD_OTHER_LOGOUT";
 
 
     //TEAM  -------------------------------------------------------------------------------
+    public static final int TEAM = 91;
     public static final int TEAM_WAITING_UPDATE = 910000;
     public static final String TEAM_910000 = "TEAM_WAITING_UPDATE";
 
