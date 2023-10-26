@@ -45,7 +45,7 @@ public class SessionContext {
         return sessionMap.get(sessionId);
     }
 
-    public synchronized int checkSessionExpried(String sessionId){
+    public synchronized int checkSessionExpired(String sessionId){
         HttpSession session = null;
         if(sessionId != null && sessionMap.containsKey(sessionId)){
             session = sessionMap.get(sessionId);

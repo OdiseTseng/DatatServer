@@ -30,7 +30,7 @@ public class NettyCommonService {
     }
 
     public MsgDTO createMsgDTO(int cmdCode, String msg, String fromName){
-        return createMsgDTO(cmdCode, msg, fromName, 0, 0);
+        return createMsgDTO(cmdCode, msg, fromName, 0);
     }
 
     public MsgDTO createMsgDTO(int cmdCode, String msg, String fromName, long level){
