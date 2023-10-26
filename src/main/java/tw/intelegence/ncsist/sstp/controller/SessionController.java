@@ -6,7 +6,10 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import tw.intelegence.ncsist.sstp.session.SessionContext;
 import tw.intelegence.ncsist.sstp.utils.text.ServerCode;
+
+import java.util.Enumeration;
 
 @Controller
 public class SessionController {
@@ -16,27 +19,38 @@ public class SessionController {
     @ResponseBody
 //    public String checkSession(HttpServletRequest request) {
     public int checkSession(HttpServletRequest request) {
-        HttpSession session = request.getSession(false); // Pass 'false' to prevent creating a new session if one doesn't exist
+//        HttpSession session = request.getSession(false); // Pass 'false' to prevent creating a new session if one doesn't exist
+//
+//        if (session != null && !session.isNew()) {
+//            // HttpSession exists and is not new, which means it's still valid
+//            long currentTime = System.currentTimeMillis();
+//            long lastAccessTime = session.getLastAccessedTime();
+//            int maxInactiveInterval = session.getMaxInactiveInterval();
+//            System.out.println("currentTime : " + currentTime);
+//            System.out.println("lastAccessTime : " + lastAccessTime);
+//            System.out.println("maxInactiveInterval : " + maxInactiveInterval * 1000);
+//
+//            if (currentTime - lastAccessTime > maxInactiveInterval * 1000) {
+//                // HttpSession has expired
+//                return ServerCode.SESSION_HAS_EXPIRED;
+//            } else {
+//                // HttpSession is still active
+//                return ServerCode.SESSION_ACTIVE;
+//            }
+//        } else {
+//            // HttpSession doesn't exist or is new (expired)
+//            return ServerCode.SESSION_NOT_EXIST;
+//        }
 
-        if (session != null && !session.isNew()) {
-            // HttpSession exists and is not new, which means it's still valid
-            long currentTime = System.currentTimeMillis();
-            long lastAccessTime = session.getLastAccessedTime();
-            int maxInactiveInterval = session.getMaxInactiveInterval();
-            System.out.println("currentTime : " + currentTime);
-            System.out.println("lastAccessTime : " + lastAccessTime);
-            System.out.println("maxInactiveInterval : " + maxInactiveInterval * 1000);
+        String sessionId = request.getRequestedSessionId();
+        System.out.println("sessionId : " + sessionId);
 
-            if (currentTime - lastAccessTime > maxInactiveInterval * 1000) {
-                // HttpSession has expired
-                return ServerCode.SESSION_HAS_EXPIRED;
-            } else {
-                // HttpSession is still active
-                return ServerCode.SESSION_ACTIVE;
-            }
-        } else {
-            // HttpSession doesn't exist or is new (expired)
-            return ServerCode.SESSION_NOT_EXIST;
-        }
+        sessionId = sessionId.split("=")[1];
+
+        System.out.println("sessionId : " + sessionId);
+
+        SessionContext sessionContext = SessionContext.getInstance();
+
+        return sessionContext.checkSessionExpried(sessionId);
     }
 }

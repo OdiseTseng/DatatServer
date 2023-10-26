@@ -3,6 +3,7 @@ package tw.intelegence.ncsist.sstp.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import tw.intelegence.ncsist.sstp.bean.Course;
 import tw.intelegence.ncsist.sstp.model.CourseDTO;
 import tw.intelegence.ncsist.sstp.service.CourseService;
+import tw.intelegence.ncsist.sstp.session.SessionContext;
 
 import java.time.LocalDate;
+import java.util.Enumeration;
 import java.util.List;
 
 
@@ -216,7 +219,36 @@ public class CourseController {
 
 	//取得
 	private List<Course> getCourseList(HttpServletRequest request){
-		HttpSession session = request.getSession();
+//		HttpSession session = request.getSession();
+//		Enumeration<String> attributeNames = session.getAttributeNames();
+//		while (attributeNames.hasMoreElements()) {
+//			String attributeName = attributeNames.nextElement();
+//			Object attributeValue = session.getAttribute(attributeName);
+//			System.out.println("attributeName : " + attributeName + " ; attributeValue : " + attributeValue);
+//		}
+		String sessionId = request.getRequestedSessionId();
+		System.out.println("sessionId : " + sessionId);
+
+		sessionId = sessionId.split("=")[1];
+
+		System.out.println("sessionId : " + sessionId);
+
+		SessionContext sessionContext = SessionContext.getInstance();
+		HttpSession session = sessionContext.getSession(sessionId);
+
+
+
+//		ServletContext context = request.getServletContext();
+//		HttpSession session = (HttpSession)context.getAttribute(sessionId);
+//
+		Enumeration<String> attributeNames = session.getAttributeNames();
+
+		while (attributeNames.hasMoreElements()) {
+			String attributeName = attributeNames.nextElement();
+			Object attributeValue = session.getAttribute(attributeName);
+			System.out.println("attributeName : " + attributeName + " ; attributeValue : " + attributeValue);
+		}
+
 //		String user = String.valueOf(session.getAttribute("user"));
 		int level = Integer.parseInt(String.valueOf(session.getAttribute("level")));
 

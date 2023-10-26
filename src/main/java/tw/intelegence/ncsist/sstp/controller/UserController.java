@@ -20,6 +20,7 @@ import tw.intelegence.ncsist.sstp.utils.func.SHAEncoder;
 import tw.intelegence.ncsist.sstp.utils.text.NettyCode;
 import tw.intelegence.ncsist.sstp.utils.text.ServerCode;
 
+import java.util.Enumeration;
 import java.util.List;
 
 
@@ -161,6 +162,14 @@ public class UserController {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user.getUsername());
 			session.setAttribute( "level", user.getLevel());
+
+			Enumeration<String> attributeNames = session.getAttributeNames();
+
+			while (attributeNames.hasMoreElements()) {
+				String attributeName = attributeNames.nextElement();
+				Object attributeValue = session.getAttribute(attributeName);
+				System.out.println("attributeName : " + attributeName + " ; attributeValue : " + attributeValue);
+			}
 
 			String sourceId = userDTO.getCtxId();
 			System.out.println("sourceId : " + sourceId);
