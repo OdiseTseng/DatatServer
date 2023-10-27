@@ -6,8 +6,10 @@ import io.netty.util.CharsetUtil;
 import lombok.Getter;
 import tw.intelegence.ncsist.sstp.model.MsgDTO;
 import tw.intelegence.ncsist.sstp.model.NettyDTO;
+import tw.intelegence.ncsist.sstp.model.TeamDTO;
 import tw.intelegence.ncsist.sstp.netty.service.NettyCommonService;
 import tw.intelegence.ncsist.sstp.netty.service.NettyTeamService;
+import tw.intelegence.ncsist.sstp.utils.func.DTOParser;
 import tw.intelegence.ncsist.sstp.utils.text.NettyCode;
 
 import java.util.*;
@@ -70,15 +72,15 @@ public class NettyMsgController {
 
         sendToOtherClientsMsg(sourceCtxId, NettyCode.CMD_OTHER_LOGIN, sourceCtxId);
 
-        msgDTO.setMsg(nettyCommonService.parseDTOToString(nettyDTO));
-        System.out.println(" chkMsg : " + nettyCommonService.parseDTOToString(msgDTO));
+        msgDTO.setMsg(DTOParser.parseDTOToString(nettyDTO));
+        System.out.println(" chkMsg : " + DTOParser.parseDTOToString(msgDTO));
 
         sendMsg(sourceCtxId, msgDTO);
     }
 
     public void sendMsg(String sourceCtxId, MsgDTO msgDTO){
         System.out.println("sendMsg ::: sourceCtxId : " + sourceCtxId + " ;;; msgDTO : " + msgDTO.toString());
-        String msgString = nettyCommonService.parseDTOToString(msgDTO);
+        String msgString = DTOParser.parseDTOToString(msgDTO);
         sendStringMsg(sourceCtxId, msgString);
     }
 
@@ -93,7 +95,7 @@ public class NettyMsgController {
 
         MsgDTO msgDTO = nettyCommonService.createMsgDTO(NettyCode.CMD_CONNECT, sourceCtxId);
 
-        String msgString = nettyCommonService.parseDTOToString(msgDTO);
+        String msgString = DTOParser.parseDTOToString(msgDTO);
         ctx.writeAndFlush(Unpooled.copiedBuffer(msgString, CharsetUtil.UTF_8));
     }
 
@@ -200,7 +202,7 @@ public class NettyMsgController {
         System.out.println("level : "  + level);
         System.out.println("team : "  + team);
 
-        MsgDTO returnMsgDTO = new MsgDTO();
+        MsgDTO returnMsgDTO;
 
         switch (cmdType) {
             case NettyCode.CMD_NORMAL:
@@ -214,6 +216,23 @@ public class NettyMsgController {
                 returnMsgDTO = nettyTeamService.treatMsgDTO(cmd, sourceCtxId, from, msg);
 
                 sendToOtherClientsMsgDTO(sourceCtxId, returnMsgDTO);
+
+                if(cmd == NettyCode.TEAM_WAITING_JOIN){
+                    returnMsgDTO.setCmd(cmd);
+                    sendMsg(sourceCtxId, returnMsgDTO);
+                }
+
+//                if(cmd == NettyCode.TEAM_WAITING_COACH_DISPATCH && idNettyMaps.get(sourceCtxId).getLevel() < 1003){
+                if(cmd == NettyCode.TEAM_WAITING_COACH_GET_ALL){
+                    List<TeamDTO> teamDTOList = nettyTeamService.getWaittingNameList(idNettyMaps);
+                    msg = DTOParser.parseDTOsToString(teamDTOList.toArray());
+
+                    System.out.println("new Msg: " + msg);
+                    returnMsgDTO.setMsg(msg);
+
+                    sendMsg(sourceCtxId, returnMsgDTO);
+                }
+
                 break;
         }
     }

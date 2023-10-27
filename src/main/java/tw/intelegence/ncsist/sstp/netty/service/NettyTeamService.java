@@ -1,7 +1,10 @@
 package tw.intelegence.ncsist.sstp.netty.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.Getter;
 import tw.intelegence.ncsist.sstp.model.MsgDTO;
 import tw.intelegence.ncsist.sstp.model.NettyDTO;
+import tw.intelegence.ncsist.sstp.model.TeamDTO;
 import tw.intelegence.ncsist.sstp.utils.text.NettyCode;
 
 import java.util.ArrayList;
@@ -11,16 +14,20 @@ import java.util.Map;
 
 public class NettyTeamService {
 
-    public List<String> waitingUsers = new ArrayList<>();
+    @Getter
+    private List<String> waitingUsers = new ArrayList<>();
 
-    public Map<Integer, HashMap<String, Integer>> teamUsers = new HashMap<>();
+    @Getter
+    private Map<String, String> waitingUserIdNames = new HashMap<>();
+
+    private Map<Integer, HashMap<String, Integer>> teamUsers = new HashMap<>();
 
     public static String createTeam(){
 
         return "";
     }
 
-    public String addWaitingUser(String ctxId){
+    public String addWaitingUser(String ctxId, String name){
 
         String message = "已加入名單";
 
@@ -28,17 +35,37 @@ public class NettyTeamService {
             message = "已存在於名單內";
         }else{
             waitingUsers.add(ctxId);
+            waitingUserIdNames.put(ctxId, name);
         }
 
         return message;
     }
 
-    public String delWaitingUser(String ctxId){
+    public List<TeamDTO> getWaittingNameList(HashMap<String, NettyDTO> idNettyMaps){
+
+        List<TeamDTO> teamDTOList = new ArrayList<>();
+        TeamDTO teamDTO = new TeamDTO();
+        for (String userCtxId : waitingUsers){
+            NettyDTO nettyDTO = idNettyMaps.get(userCtxId);
+            teamDTO.setCtxId(userCtxId);
+            teamDTO.setTeam(0);
+            teamDTO.setName(nettyDTO.getName());
+
+            teamDTOList.add(teamDTO);
+
+            teamDTO = new TeamDTO();
+        }
+
+        return teamDTOList;
+    }
+
+    public String delWaitingUser(String ctxId, String name){
 
         String message = "未存在於等待名單中";
 
         if(waitingUsers.contains(ctxId)){
             waitingUsers.remove(ctxId);
+            waitingUserIdNames.remove(ctxId, name);
             message = "已從等待名單中刪除";
         }
 
@@ -52,7 +79,7 @@ public class NettyTeamService {
         return message;
     }
 
-    public String addTeam(String ctxId, int teamNumber){
+    public String addTeam(String ctxId, int teamNumber, String name){
 
         String message;
 
@@ -63,7 +90,7 @@ public class NettyTeamService {
             list.put(ctxId, 1);
 
             teamUsers.put(teamNumber, list);
-            message = delWaitingUser(ctxId);
+            message = delWaitingUser(ctxId, name);
             message += ", 新增團隊(" + teamNumber + ")並加入團隊名單成功";
         }else{
             list = teamUsers.get(teamNumber);
@@ -71,7 +98,7 @@ public class NettyTeamService {
                 message = "已存在於團隊名單中";
             }else{
                 list.put(ctxId, list.size() + 1);
-                message = delWaitingUser(ctxId);
+                message = delWaitingUser(ctxId, name);
                 message += ", 加入團隊(" + teamNumber + ")名單成功";
             }
         }
@@ -96,88 +123,98 @@ public class NettyTeamService {
     }
 
     public MsgDTO treatMsgDTO(int cmd, String sourceCtxId, String from, String msg){
+        System.out.println("team treatMsgDTO : cmd= " + cmd + " sourceCtxId= " + sourceCtxId+ " from= " + from + " msg= " + msg);
+
+
         MsgDTO msgDTO = new MsgDTO();
         switch(cmd){
             case NettyCode.TEAM_WAITING_UPDATE:                   //00
-                msgDTO.setCmd(NettyCode.CMD_NORMAL_OTHER_MSG);
+                msgDTO.setCmd(NettyCode.TEAM_WAITING_UPDATE);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_WAITING_WAIT:                   //01
-                msgDTO.setCmd(NettyCode.CMD_NORMAL_OTHER_MSG);
+                msgDTO.setCmd(NettyCode.TEAM_WAITING_WAIT);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_WAITING_WAIT_TIMEOUT:           //02
-                msgDTO.setCmd(NettyCode.CMD_OTHER_CONNECT);
+                msgDTO.setCmd(NettyCode.TEAM_WAITING_WAIT_TIMEOUT);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_WAITING_JOIN:                   //03
-                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msg = addWaitingUser(sourceCtxId, from);
+                msgDTO.setCmd(NettyCode.TEAM_WAITING_OTHER_JOIN);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_WAITING_JOIN_FAIL:              //04
-                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setCmd(NettyCode.TEAM_WAITING_JOIN_FAIL);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
-            case NettyCode.TEAM_WAITING_COACH_DISPATCH:         //05
-                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+            case NettyCode.TEAM_WAITING_COACH_GET_ALL:          //05
+                msgDTO.setCmd(NettyCode.TEAM_WAITING_COACH_GET_ALL);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
-            case NettyCode.TEAM_WAITING_COACH_DISPATCH_FAIL:    //06
-                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+            case NettyCode.TEAM_WAITING_COACH_DISPATCH:         //06
+                msgDTO.setCmd(NettyCode.TEAM_WAITING_COACH_DISPATCH);
+                msgDTO.setFrom(from);
+                msgDTO.setMsg(msg);
+                break;
+
+            case NettyCode.TEAM_WAITING_COACH_DISPATCH_FAIL:         //07
+                msgDTO.setCmd(NettyCode.TEAM_WAITING_COACH_DISPATCH_FAIL);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_WAITING_NEXT:                   //07
-                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setCmd(NettyCode.TEAM_WAITING_NEXT);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_COURSE_STEP_WAITING:            //08
-                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setCmd(NettyCode.TEAM_COURSE_STEP_WAITING);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_COURSE_STEP_STARTING:           //09
-                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setCmd(NettyCode.TEAM_COURSE_STEP_STARTING);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_COURSE_STEP_FINISH:             //10
-                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setCmd(NettyCode.TEAM_COURSE_STEP_FINISH);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_COURSE_ALL_FINISH:              //11
-                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setCmd(NettyCode.TEAM_COURSE_ALL_FINISH);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_COURSE_ALL_FAIL:                //12
-                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setCmd(NettyCode.TEAM_COURSE_ALL_FAIL);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_COURSE_DEL_TEAM:                //13
-                msgDTO.setCmd(NettyCode.CMD_LOGIN);
+                msgDTO.setCmd(NettyCode.TEAM_COURSE_DEL_TEAM);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;

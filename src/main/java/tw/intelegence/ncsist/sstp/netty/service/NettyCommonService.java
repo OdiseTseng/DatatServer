@@ -59,51 +59,38 @@ public class NettyCommonService {
         return nettyDTO;
     }
 
-    public String parseDTOToString(Object objDTO){
-        String msgString;
-
-        try {
-            msgString = objectMapper.writeValueAsString(objDTO);
-        } catch (JsonProcessingException e) {
-            System.out.println("JsonProcessingException : " + e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        return msgString;
-    }
-
     public MsgDTO treatMsgDTO(int cmd, String sourceCtxId, String from, String msg){
 
-        System.out.println("treatMsgDTO : cmd= " + cmd + " sourceCtxId= " + sourceCtxId+ " from= " + from + " msg= " + msg);
+        System.out.println("common treatMsgDTO : cmd= " + cmd + " sourceCtxId= " + sourceCtxId+ " from= " + from + " msg= " + msg);
 
         MsgDTO msgDTO = new MsgDTO();
 
         switch(cmd){
-            case NettyCode.CMD_NORMAL_MSG:
+            case NettyCode.CMD_NORMAL_MSG:  //89 001
                 msgDTO.setCmd(NettyCode.CMD_NORMAL_OTHER_MSG);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
-            case NettyCode.CMD_CONNECT:
+            case NettyCode.CMD_CONNECT:     //90 001
                 msgDTO.setCmd(NettyCode.CMD_OTHER_CONNECT);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
-            case NettyCode.CMD_DISCONNECT:
+            case NettyCode.CMD_DISCONNECT:  //90 002
                 msgDTO.setCmd(NettyCode.CMD_OTHER_DISCONNECT);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
-            case NettyCode.CMD_LOGIN:
+            case NettyCode.CMD_LOGIN:       //90  003
                 msgDTO.setCmd(NettyCode.CMD_OTHER_LOGIN);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
-            case NettyCode.CMD_LOGOUT:
+            case NettyCode.CMD_LOGOUT:      //90 004
                 msgDTO.setCmd(NettyCode.CMD_OTHER_LOGOUT);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);

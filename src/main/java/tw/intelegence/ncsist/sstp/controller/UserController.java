@@ -49,9 +49,13 @@ public class UserController {
 			user.setPassword(SHAEncoder.getSHA256("1"));
 			user.setName("001");
 			user.setLevel(1002L);
-			user.setIp("192.168.50.46");
+			user.setGrade(2004L);
 			user.setStudentId(2075001L);
 			user.setStudentBatch(2023001L);
+			user.setStudentWork("教官");
+			user.setStudentUnit("教育訓練部教官");
+			user.setStudentUnitCode(996);
+			user.setIp("192.168.50.46");
 			user.setState(1L);
 			user.setLongDate(longDate);
 //		userService.save(user);
@@ -62,12 +66,15 @@ public class UserController {
 			user.setPassword(SHAEncoder.getSHA256("2"));
 			user.setName("002");
 			user.setLevel(1003L);
-			user.setIp("192.168.50.47");
+			user.setGrade(2005L);
 			user.setStudentId(2075002L);
 			user.setStudentBatch(2023001L);
+			user.setStudentWork("指揮官");
+			user.setStudentUnit("情資收集作戰部");
+			user.setStudentUnitCode(995);
+			user.setIp("192.168.50.47");
 			user.setState(1L);
 			user.setLongDate(longDate);
-//		userService.save(user);
 			userService.updateUser(user);
 
 			//學生
@@ -75,12 +82,15 @@ public class UserController {
 			user.setPassword(SHAEncoder.getSHA256("3"));
 			user.setName("003");
 			user.setLevel(1004L);
-			user.setIp("192.168.50.48");
+			user.setGrade(2008L);
 			user.setStudentId(2075003L);
 			user.setStudentBatch(2023001L);
+			user.setStudentWork("作戰官");
+			user.setStudentUnit("情資作戰部");
+			user.setStudentUnitCode(990);
+			user.setIp("192.168.50.48");
 			user.setState(1L);
 			user.setLongDate(longDate);
-//		userService.save(user);
 			userService.updateUser(user);
 
 			//學生
@@ -88,12 +98,15 @@ public class UserController {
 			user.setPassword(SHAEncoder.getSHA256("4"));
 			user.setName("004");
 			user.setLevel(1004L);
-			user.setIp("192.168.50.49");
+			user.setGrade(2009L);
 			user.setStudentId(2075004L);
 			user.setStudentBatch(2023001L);
+			user.setStudentWork("作戰官");
+			user.setStudentUnit("情資作戰部");
+			user.setStudentUnitCode(990);
+			user.setIp("192.168.50.49");
 			user.setState(1L);
 			user.setLongDate(longDate);
-//		userService.save(user);
 			userService.updateUser(user);
 
 			//學生
@@ -101,12 +114,15 @@ public class UserController {
 			user.setPassword(SHAEncoder.getSHA256("5"));
 			user.setName("005");
 			user.setLevel(1004L);
-			user.setIp("192.168.50.50");
+			user.setGrade(2010L);
 			user.setStudentId(2075005L);
 			user.setStudentBatch(2023001L);
+			user.setStudentWork("作戰官");
+			user.setStudentUnit("情資作戰部");
+			user.setStudentUnitCode(990);
+			user.setIp("192.168.50.50");
 			user.setState(1L);
 			user.setLongDate(longDate);
-//		userService.save(user);
 			userService.updateUser(user);
 
 			message = "初始化使用者完成。";

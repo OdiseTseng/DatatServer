@@ -67,8 +67,8 @@ public class UserRepository {
 
         if(fUser == null){
             queryFactory.insert(qUser)
-                    .columns(qUser.username, qUser.password, qUser.ip, qUser.level, qUser.name, qUser.state, qUser.longDate, qUser.studentId, qUser.studentBatch)
-                    .values(user.getUsername(), user.getPassword(), user.getIp(), user.getLevel(), user.getName(), user.getState(), user.getLongDate(), user.getStudentId(), user.getStudentBatch())
+                    .columns(qUser.username, qUser.password, qUser.ip, qUser.level, qUser.grade, qUser.studentWork, qUser.studentUnit, qUser.studentUnitCode, qUser.name, qUser.state, qUser.longDate, qUser.studentId, qUser.studentBatch)
+                    .values(user.getUsername(), user.getPassword(), user.getIp(), user.getLevel(), user.getGrade(), user.getStudentWork(), user.getStudentUnit(), user.getStudentUnitCode(), user.getName(), user.getState(), user.getLongDate(), user.getStudentId(), user.getStudentBatch())
                     .execute();
         }else{
             queryFactory.update(qUser)
@@ -77,6 +77,10 @@ public class UserRepository {
                     .set(qUser.studentId, user.getStudentId())
                     .set(qUser.ip, user.getIp())
                     .set(qUser.level, user.getLevel())
+                    .set(qUser.grade, user.getGrade())
+                    .set(qUser.studentWork, qUser.studentWork)
+                    .set(qUser.studentUnit, user.getStudentUnit())
+                    .set(qUser.studentUnitCode, user.getStudentUnitCode())
                     .set(qUser.longDate, user.getLongDate())
                     .set(qUser.oAuthKey, user.getOAuthKey())
                     .set(qUser.studentBatch, user.getStudentBatch())
