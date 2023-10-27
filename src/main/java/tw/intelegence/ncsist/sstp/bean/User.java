@@ -41,8 +41,20 @@ public class User implements Serializable{
 	@Schema(description = "學員梯次", example = "2023001")
 	private Long studentBatch;
 
-	@Schema(description = "職級", example = "1001=管理者，1002=教官，1003=指揮學員，1004=一般學員")
+	@Schema(description = "學員層級", example = "1001=管理者，1002=教官，1003=指揮學員，1004=一般學員")
 	private Long level;
+
+	@Schema(description = "學員職級", example = "2000=將軍，2001=上校，2002=中校，2003=少校，2004=上尉，2005=中尉，2006=少尉，2007=一等士官長，2008=二等士官長，2009=三等士官長，2010=上士，2011=中士，2012=下士，2013=上兵，2014=一兵，2015=二兵")
+	private Long grade;
+
+	@Schema(description = "學員職位", example = "防衛官")
+	private String studentWork;
+
+	@Schema(description = "學員單位", example = "陸軍作戰指揮部")
+	private String studentUnit;
+
+	@Schema(description = "學員單位代碼", example = "996")
+	private int studentUnitCode;
 
 	@Schema(description = "登錄IP", example = "192.168.0.100")
 	private String ip;

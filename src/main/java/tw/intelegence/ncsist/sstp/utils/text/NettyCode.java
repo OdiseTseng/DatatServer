@@ -51,30 +51,41 @@ public class NettyCode {
     public static  final int TEAM_WAITING_JOIN_FAIL = 910004;
     public static final String TEAM_910004 = "TEAM_WAITING_JOIN_FAIL";
 
-    public static  final int TEAM_WAITING_COACH_DISPATCH = 910005;
-    public static final String TEAM_910005 = "TEAM_WAITING_COACH_DISPATCH";
+    public static  final int TEAM_WAITING_OTHER_JOIN = 910005;
+    public static final String TEAM_910005 = "TEAM_WAITING_OTHER_JOIN";
 
-    public static  final int TEAM_WAITING_COACH_DISPATCH_FAIL = 910006;
-    public static final String TEAM_910006 = "TEAM_WAITING_COACH_DISPATCH_FAIL";
+    //------------------------------
 
-    public static  final int TEAM_WAITING_NEXT = 910007;
-    public static final String TEAM_910007 = "TEAM_WAITING_NEXT";
+    public static  final int TEAM_WAITING_COACH_GET_ALL = 910101;
+    public static final String TEAM_910102 = "TEAM_WAITING_COACH_GET_ALL";
 
-    public static  final int TEAM_COURSE_STEP_WAITING = 910008;
-    public static final String TEAM_910008 = "TEAM_COURSE_STEP_WAITING";
+    public static  final int TEAM_WAITING_COACH_DISPATCH = 910102;
+    public static final String TEAM_910101 = "TEAM_WAITING_COACH_DISPATCH";
 
-    public static  final int TEAM_COURSE_STEP_STARTING = 910009;
-    public static final String TEAM_910009 = "TEAM_COURSE_STEP_STARTING";
 
-    public static  final int TEAM_COURSE_STEP_FINISH = 910010;
-    public static final String TEAM_910010 = "TEAM_COURSE_STEP_FINISH";
+    public static  final int TEAM_WAITING_COACH_DISPATCH_FAIL = 910103;
+    public static final String TEAM_910103 = "TEAM_WAITING_COACH_DISPATCH_FAIL";
 
-    public static  final int TEAM_COURSE_ALL_FINISH = 910011;
-    public static final String TEAM_910011 = "TEAM_COURSE_ALL_FINISH";
+    public static  final int TEAM_WAITING_NEXT = 910104;
+    public static final String TEAM_910104 = "TEAM_WAITING_NEXT";
 
-    public static  final int TEAM_COURSE_ALL_FAIL = 910012;
-    public static final String TEAM_910012 = "TEAM_COURSE_ALL_FAIL";
+    //------------------------------
+    public static  final int TEAM_COURSE_STEP_WAITING = 910201;
+    public static final String TEAM_910201 = "TEAM_COURSE_STEP_WAITING";
 
-    public static  final int TEAM_COURSE_DEL_TEAM = 910013;
-    public static final String TEAM_910013 = "TEAM_COURSE_DEL_TEAM";
+    public static  final int TEAM_COURSE_STEP_STARTING = 910202;
+    public static final String TEAM_910202 = "TEAM_COURSE_STEP_STARTING";
+
+    public static  final int TEAM_COURSE_STEP_FINISH = 910203;
+    public static final String TEAM_910203 = "TEAM_COURSE_STEP_FINISH";
+
+    public static  final int TEAM_COURSE_ALL_FINISH = 910204;
+    public static final String TEAM_910204 = "TEAM_COURSE_ALL_FINISH";
+
+    public static  final int TEAM_COURSE_ALL_FAIL = 910205;
+    public static final String TEAM_910205 = "TEAM_COURSE_ALL_FAIL";
+
+    //------------------------------
+    public static  final int TEAM_COURSE_DEL_TEAM = 910301;
+    public static final String TEAM_910301 = "TEAM_COURSE_DEL_TEAM";
 }
