@@ -8,19 +8,6 @@ import tw.intelegence.ncsist.sstp.utils.text.NettyCode;
 
 public class NettyCommonService {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
-    public MsgDTO toMsgDTO(String msg){
-        MsgDTO msgDTO;
-        try {
-            msgDTO = objectMapper.readValue(msg, MsgDTO.class);
-        } catch (JsonProcessingException e) {
-            System.out.println("JsonProcessingException : " + e.getMessage());
-            throw new RuntimeException(e);
-        }
-        return msgDTO;
-    }
-
     public MsgDTO createMsgDTO(int cmdCode){
         return createMsgDTO(cmdCode, "");
     }
@@ -46,17 +33,6 @@ public class NettyCommonService {
         msgDTO.setTeam(team);
 
         return msgDTO;
-    }
-
-    public NettyDTO toNettyDTO(String msg){
-        NettyDTO nettyDTO;
-        try {
-            nettyDTO = objectMapper.readValue(msg, NettyDTO.class);
-        } catch (JsonProcessingException e) {
-            System.out.println("JsonProcessingException : " + e.getMessage());
-            throw new RuntimeException(e);
-        }
-        return nettyDTO;
     }
 
     public MsgDTO treatMsgDTO(int cmd, String sourceCtxId, String from, String msg){

@@ -57,10 +57,10 @@ public class NettyCode {
     //------------------------------
 
     public static  final int TEAM_WAITING_COACH_GET_ALL = 910101;
-    public static final String TEAM_910102 = "TEAM_WAITING_COACH_GET_ALL";
+    public static final String TEAM_910101 = "TEAM_WAITING_COACH_GET_ALL";
 
     public static  final int TEAM_WAITING_COACH_DISPATCH = 910102;
-    public static final String TEAM_910101 = "TEAM_WAITING_COACH_DISPATCH";
+    public static final String TEAM_910102 = "TEAM_WAITING_COACH_DISPATCH";
 
 
     public static  final int TEAM_WAITING_COACH_DISPATCH_FAIL = 910103;

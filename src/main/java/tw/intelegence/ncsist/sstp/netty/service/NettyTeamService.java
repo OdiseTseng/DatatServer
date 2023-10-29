@@ -5,6 +5,7 @@ import lombok.Getter;
 import tw.intelegence.ncsist.sstp.model.MsgDTO;
 import tw.intelegence.ncsist.sstp.model.NettyDTO;
 import tw.intelegence.ncsist.sstp.model.TeamDTO;
+import tw.intelegence.ncsist.sstp.utils.func.DTOParser;
 import tw.intelegence.ncsist.sstp.utils.text.NettyCode;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class NettyTeamService {
         return message;
     }
 
-    public List<TeamDTO> getWaittingNameList(HashMap<String, NettyDTO> idNettyMaps){
+    public String getWaittingNameListStr(HashMap<String, NettyDTO> idNettyMaps){
 
         List<TeamDTO> teamDTOList = new ArrayList<>();
         TeamDTO teamDTO = new TeamDTO();
@@ -56,7 +57,7 @@ public class NettyTeamService {
             teamDTO = new TeamDTO();
         }
 
-        return teamDTOList;
+        return DTOParser.parseDTOsToString(teamDTOList.toArray());
     }
 
     public String delWaitingUser(String ctxId, String name){
@@ -106,6 +107,28 @@ public class NettyTeamService {
         return message;
     }
 
+    public String getTeamListStr(){
+
+        List<TeamDTO> teamDTOList = new ArrayList<>();
+        TeamDTO teamDTO = new TeamDTO();
+        for (int teamKey : teamUsers.keySet()){
+            Map<String, Integer> teamUser = teamUsers.get(teamKey);
+            for(String ctxIdKey : teamUser.keySet()){
+                String name = waitingUserIdNames.get(ctxIdKey);
+                teamDTO.setCtxId(ctxIdKey);
+                teamDTO.setTeam(teamKey);
+                teamDTO.setName(name);
+
+                teamDTOList.add(teamDTO);
+
+                teamDTO = new TeamDTO();
+            }
+
+        }
+
+        return DTOParser.parseDTOsToString(teamDTOList.toArray());
+    }
+
     public int delAllTeam(){
         String message = "已清空所有團隊";
         teamUsers = new HashMap<>();
@@ -120,6 +143,40 @@ public class NettyTeamService {
         teamUsers = newTeamUsers;
 
         return NettyCode.TEAM_WAITING_COACH_DISPATCH;
+    }
+
+    public void updateTeam(String msg){
+        TeamDTO[] teamDTOs = (TeamDTO[])DTOParser.parseStringToDTO(msg, TeamDTO[].class);
+
+        if(teamDTOs != null){
+            for (TeamDTO teamDTO: teamDTOs){
+                int team = teamDTO.getTeam();
+                String ctxId = teamDTO.getCtxId();
+                String name = teamDTO.getName();
+//            boolean findKey = false;
+//            for(int key :teamUsers.keySet()){
+//
+//            }
+                HashMap<String, Integer> user;
+                if(teamUsers.containsKey(team)){
+                    user = teamUsers.get(team);
+                    if(team != 0){
+                        if(user.containsKey(ctxId)){
+                            user.replace(ctxId, team);
+                        }else {
+                            user.put(ctxId, team);
+                        }
+                    }else{
+                        user.remove(ctxId);
+                    }
+
+                }else{
+                    user = new HashMap<>();
+                    user.put(ctxId, team);
+                    teamUsers.put(team, user);
+                }
+            }
+        }
     }
 
     public MsgDTO treatMsgDTO(int cmd, String sourceCtxId, String from, String msg){
@@ -166,6 +223,7 @@ public class NettyTeamService {
                 break;
 
             case NettyCode.TEAM_WAITING_COACH_DISPATCH:         //06
+                updateTeam(msg);
                 msgDTO.setCmd(NettyCode.TEAM_WAITING_COACH_DISPATCH);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);

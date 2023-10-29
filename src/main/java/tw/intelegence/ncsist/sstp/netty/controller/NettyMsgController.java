@@ -9,6 +9,7 @@ import tw.intelegence.ncsist.sstp.model.NettyDTO;
 import tw.intelegence.ncsist.sstp.model.TeamDTO;
 import tw.intelegence.ncsist.sstp.netty.service.NettyCommonService;
 import tw.intelegence.ncsist.sstp.netty.service.NettyTeamService;
+import tw.intelegence.ncsist.sstp.utils.func.CodeDecoder;
 import tw.intelegence.ncsist.sstp.utils.func.DTOParser;
 import tw.intelegence.ncsist.sstp.utils.text.NettyCode;
 
@@ -186,7 +187,7 @@ public class NettyMsgController {
 
     public void treatMsg(String sourceCtxId, String sourceMsg){
         System.out.println("treatMsg ::: sourceCtxId : " + sourceCtxId + " ;;; sourceMsg : " + sourceMsg);
-        MsgDTO msgDTO = nettyCommonService.toMsgDTO(sourceMsg);
+        MsgDTO msgDTO = DTOParser.toMsgDTO(sourceMsg);
 
         int cmd = msgDTO.getCmd();
         int cmdType = cmd / 10000;
@@ -203,16 +204,19 @@ public class NettyMsgController {
         System.out.println("team : "  + team);
 
         MsgDTO returnMsgDTO;
+        String decodeMsg = "";
 
         switch (cmdType) {
             case NettyCode.CMD_NORMAL:
             case NettyCode.CMD:
+                decodeMsg = CodeDecoder.getCodeMsg("CMD", cmd);
                 returnMsgDTO = nettyCommonService.treatMsgDTO(cmd, sourceCtxId, from, msg);
 
                 sendToOtherClientsMsgDTO(sourceCtxId, returnMsgDTO);
                 break;
 
             case NettyCode.TEAM:
+                decodeMsg = CodeDecoder.getCodeMsg("TEAM", cmd);
                 returnMsgDTO = nettyTeamService.treatMsgDTO(cmd, sourceCtxId, from, msg);
 
                 sendToOtherClientsMsgDTO(sourceCtxId, returnMsgDTO);
@@ -224,9 +228,18 @@ public class NettyMsgController {
 
 //                if(cmd == NettyCode.TEAM_WAITING_COACH_DISPATCH && idNettyMaps.get(sourceCtxId).getLevel() < 1003){
                 if(cmd == NettyCode.TEAM_WAITING_COACH_GET_ALL){
-                    List<TeamDTO> teamDTOList = nettyTeamService.getWaittingNameList(idNettyMaps);
-                    msg = DTOParser.parseDTOsToString(teamDTOList.toArray());
+//                    List<TeamDTO> teamDTOList = nettyTeamService.getWaittingNameList(idNettyMaps);
+//                    msg = DTOParser.parseDTOsToString(teamDTOList.toArray());
+                    msg = nettyTeamService.getWaittingNameListStr(idNettyMaps);
 
+                    System.out.println("new Msg: " + msg);
+                    returnMsgDTO.setMsg(msg);
+
+                    sendMsg(sourceCtxId, returnMsgDTO);
+                }
+
+                if(cmd == NettyCode.TEAM_WAITING_COACH_DISPATCH){
+                    msg = nettyTeamService.getTeamListStr();
                     System.out.println("new Msg: " + msg);
                     returnMsgDTO.setMsg(msg);
 
@@ -235,5 +248,7 @@ public class NettyMsgController {
 
                 break;
         }
+
+//        System.out.println("decodeMsg : " + decodeMsg);
     }
 }
