@@ -125,6 +125,47 @@ public class UserController {
 			user.setLongDate(longDate);
 			userService.updateUser(user);
 
+			//命名規則稍微不太一樣，我先以不影響我這邊TS系統為主設立DB，server一樣先用我那邊建立的
+			//教官1
+			user.setUsername("test@1");
+			user.setPassword(SHAEncoder.getSHA256("test@01"));
+			user.setName("諸葛孔明");
+			user.setLevel(2L);
+			user.setGrade(0L);
+			user.setStudentId(50001L);
+			user.setStudentBatch(0L);
+			user.setStudentWork("教官");
+			user.setStudentUnit("教育訓練部教官");
+			user.setState(1L);
+			user.setLongDate(longDate);
+			userService.updateUser(user);
+			//號手1
+			user.setUsername("test@10");
+			user.setPassword(SHAEncoder.getSHA256("test@010"));
+			user.setName("杰倫Chou");
+			user.setLevel(1L);
+			user.setGrade(0L);
+			user.setStudentId(70010L);
+			user.setStudentBatch(0L);
+			user.setStudentWork("作戰官");
+			user.setStudentUnit("中區");
+			user.setState(1L);
+			user.setLongDate(longDate);
+			userService.updateUser(user);
+			//號手2
+			user.setUsername("test@20");
+			user.setPassword(SHAEncoder.getSHA256("test@020"));
+			user.setName("Jacky");
+			user.setLevel(1L);
+			user.setGrade(1L);
+			user.setStudentId(70040L);
+			user.setStudentBatch(0L);
+			user.setStudentWork("作戰官");
+			user.setStudentUnit("北區");
+			user.setState(1L);
+			user.setLongDate(longDate);
+			userService.updateUser(user);
+
 			message = "初始化使用者完成。";
 		}
 

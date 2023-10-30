@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.intelegence.ncsist.sstp.bean.Oper;
+import tw.intelegence.ncsist.sstp.bean.Quiz;
 import tw.intelegence.ncsist.sstp.service.OperService;
 
 import java.time.LocalDate;
@@ -35,6 +36,78 @@ public class OperController {
 			long longDate = System.currentTimeMillis();
 
 			long newId = createId(0L);
+			long quizId = 0L;
+
+			Oper operation = new Oper();
+			operation.setUnitId(5L);
+			operation.setAnswer("400");
+			operation.setState(1L);
+			operation.setLongDate(longDate);
+
+			operService.saveOper(operation);
+
+			operation.setUnitId(5L);
+			operation.setAnswer("500");
+			operation.setState(1L);
+			operation.setLongDate(longDate);
+
+			operService.saveOper(operation);
+
+			operation.setUnitId(5L);
+			operation.setAnswer("-70");
+			operation.setState(1L);
+			operation.setLongDate(longDate);
+
+			operService.saveOper(operation);
+
+			operation.setUnitId(5L);
+			operation.setAnswer("100");
+			operation.setState(1L);
+			operation.setLongDate(longDate);
+
+			operService.saveOper(operation);
+
+			operation.setUnitId(5L);
+			operation.setAnswer("270");
+			operation.setState(1L);
+			operation.setLongDate(longDate);
+
+			operService.saveOper(operation);
+
+			operation.setUnitId(39L);
+			operation.setAnswer("400");
+			operation.setState(1L);
+			operation.setLongDate(longDate);
+
+			operService.saveOper(operation);
+
+			operation.setUnitId(39L);
+			operation.setAnswer("500");
+			operation.setState(1L);
+			operation.setLongDate(longDate);
+
+			operService.saveOper(operation);
+
+			operation.setUnitId(39L);
+			operation.setAnswer("-70");
+			operation.setState(1L);
+			operation.setLongDate(longDate);
+
+			operService.saveOper(operation);
+
+			operation.setUnitId(39L);
+			operation.setAnswer("100");
+			operation.setState(1L);
+			operation.setLongDate(longDate);
+
+			operService.saveOper(operation);
+
+			operation.setUnitId(39L);
+			operation.setAnswer("270");
+			operation.setState(1L);
+			operation.setLongDate(longDate);
+
+			operService.saveOper(operation);
 
 
 			message = "初始化操作列表完成";
