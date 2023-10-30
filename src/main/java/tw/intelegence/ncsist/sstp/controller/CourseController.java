@@ -118,7 +118,9 @@ public class CourseController {
 			newId = createCourseId(newId);
 			System.out.println("6th currenCcourseId : " + newId);
 
-			course.setCourseId(newId);
+//			course.setCourseId(newId);
+			//先暫時改成5L
+			course.setCourseId(5L);
 			course.setCourseType(1L);
 			course.setCourseName("信號偵蒐測向");
 			course.setCourseSchedule(45L);

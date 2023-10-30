@@ -89,6 +89,49 @@ public class QuizController {
 
 			quizService.saveQuiz(quiz);
 
+			quiz.setUnitId(5L);
+			quiz.setTitle("信號搜索測驗");
+			quiz.setContent("偵搜車到達現場時，通訊兵打開搜索系統，經過搜索後，請問最可疑的無人機訊號可能是?");
+			quiz.setTofQuiz(2L);
+			quiz.setEssayQuiz(1L);
+			quiz.setAnswer("477");
+			quiz.setState(1L);
+			quiz.setLongDate(longDate);
+
+			quizService.saveQuiz(quiz);
+
+			quiz.setUnitId(5L);
+			quiz.setTitle("信號搜索是非題");
+			quiz.setContent("請問操作上是否可以不聽從長官指示自行調整截收準位?");
+			quiz.setTofQuiz(1L);
+			quiz.setEssayQuiz(2L);
+			quiz.setAnswer("否");
+			quiz.setState(1L);
+			quiz.setLongDate(longDate);
+
+			quizService.saveQuiz(quiz);
+
+			quiz.setUnitId(39L);
+			quiz.setTitle("信號搜索測驗");
+			quiz.setContent("(團體)偵搜車到達現場時，通訊兵打開搜索系統，經過搜索後，請問最可疑的無人機訊號可能是?");
+			quiz.setTofQuiz(2L);
+			quiz.setEssayQuiz(1L);
+			quiz.setAnswer("477");
+			quiz.setState(1L);
+			quiz.setLongDate(longDate);
+
+			quizService.saveQuiz(quiz);
+
+			quiz.setUnitId(39L);
+			quiz.setTitle("信號搜索是非題");
+			quiz.setContent("(團體)請問操作上是否可以不聽從長官指示自行調整截收準位?");
+			quiz.setTofQuiz(1L);
+			quiz.setEssayQuiz(2L);
+			quiz.setAnswer("否");
+			quiz.setState(1L);
+			quiz.setLongDate(longDate);
+
+			quizService.saveQuiz(quiz);
 
 			message = "初始化測驗列表完成";
 		}
