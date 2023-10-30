@@ -97,6 +97,8 @@ public class UnitController {
 					"2．    使用監視功能，獲取可疑跳頻訊號\n" +
 					"3．    報表判讀，確定可疑跳頻訊號");
 			unit.setUnitName("信號搜索");
+			unit.setCreditUnits(6L);
+			unit.setUnitOrder(4L);
 			unit.setUnitSchedule(30L);//30mins >>> 30 標準單位 分鐘
 			unit.setVideoUrl("Z:\\\\SSTP\\\\demo\\\\videos\\\\DEMO圖資畫面");
 			unit.setVideoFormat(".mp4");
@@ -112,6 +114,8 @@ public class UnitController {
 			unit.setUnitId(6L);
 			unit.setCourseId(5L);
 			unit.setUnitName("信號追蹤(含監聽)");
+			unit.setCreditUnits(6L);
+			unit.setUnitOrder(4L);
 			unit.setUnitSchedule(30L);//30mins >>> 30 標準單位 分鐘
 			unit.setState(1L);
 			unit.setLongDate(longDate);
@@ -120,6 +124,8 @@ public class UnitController {
 			unit.setUnitId(7L);
 			unit.setCourseId(5L);
 			unit.setUnitName("信號監視");
+			unit.setCreditUnits(6L);
+			unit.setUnitOrder(4L);
 			unit.setUnitSchedule(30L);//30mins >>> 30 標準單位 分鐘
 			unit.setState(1L);
 			unit.setLongDate(longDate);
@@ -128,6 +134,8 @@ public class UnitController {
 			unit.setUnitId(4L);
 			unit.setCourseId(5L);
 			unit.setUnitName("參數說明");
+			unit.setCreditUnits(6L);
+			unit.setUnitOrder(4L);
 			unit.setUnitSchedule(30L);//30mins >>> 30 標準單位 分鐘
 			unit.setState(1L);
 			unit.setLongDate(longDate);
@@ -147,6 +155,8 @@ public class UnitController {
 					"3.\t剔除480～490MHz波段訊號 \n" +
 					"4.\t剔除100～270度來向角訊號\n");
 			unit.setUnitName("團體連線課程");
+			unit.setCreditUnits(6L);
+			unit.setUnitOrder(4L);
 			unit.setUnitSchedule(30L);//30mins >>> 30 標準單位 分鐘
 			unit.setVideoUrl("Z:\\\\SSTP\\\\demo\\\\videos\\\\DEMO圖資畫面");
 			unit.setVideoFormat(".mp4");
