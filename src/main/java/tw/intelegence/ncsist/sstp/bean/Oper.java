@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Accessors(chain = true)
 @Entity
-@Table(name = "operation")
+@Table(name = "oper")
 @Schema(name = "內容", description = "測驗的內容描述")
 public class Oper implements Serializable{
 	@Id

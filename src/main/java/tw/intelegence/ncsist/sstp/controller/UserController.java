@@ -47,7 +47,7 @@ public class UserController {
 			User user = new User();
 			user.setUsername("1");
 			user.setPassword(SHAEncoder.getSHA256("1"));
-			user.setName("001");
+			user.setName("諸葛教官");
 			user.setLevel(1002L);
 			user.setGrade(2004L);
 			user.setStudentId(2075001L);
@@ -64,7 +64,7 @@ public class UserController {
 			//指揮
 			user.setUsername("2");
 			user.setPassword(SHAEncoder.getSHA256("2"));
-			user.setName("002");
+			user.setName("劉禪指揮");
 			user.setLevel(1003L);
 			user.setGrade(2005L);
 			user.setStudentId(2075002L);
@@ -80,7 +80,7 @@ public class UserController {
 			//學生
 			user.setUsername("3");
 			user.setPassword(SHAEncoder.getSHA256("3"));
-			user.setName("003");
+			user.setName("馬超學生");
 			user.setLevel(1004L);
 			user.setGrade(2008L);
 			user.setStudentId(2075003L);
@@ -96,7 +96,7 @@ public class UserController {
 			//學生
 			user.setUsername("4");
 			user.setPassword(SHAEncoder.getSHA256("4"));
-			user.setName("004");
+			user.setName("馬良學生");
 			user.setLevel(1004L);
 			user.setGrade(2009L);
 			user.setStudentId(2075004L);
@@ -112,7 +112,7 @@ public class UserController {
 			//學生
 			user.setUsername("5");
 			user.setPassword(SHAEncoder.getSHA256("5"));
-			user.setName("005");
+			user.setName("阿諾州長");
 			user.setLevel(1004L);
 			user.setGrade(2010L);
 			user.setStudentId(2075005L);
