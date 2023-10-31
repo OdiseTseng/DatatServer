@@ -43,12 +43,15 @@ public class OperController {
 			operation.setAnswer("400");
 			operation.setState(1L);
 			operation.setLongDate(longDate);
-
+			operation.setOperId(1L);
+			operation.setContentId(1L);
 			operService.saveOper(operation);
 
 			operation.setUnitId(5L);
 			operation.setAnswer("500");
 			operation.setState(1L);
+			operation.setOperId(2L);
+			operation.setContentId(2L);
 			operation.setLongDate(longDate);
 
 			operService.saveOper(operation);
@@ -56,6 +59,8 @@ public class OperController {
 			operation.setUnitId(5L);
 			operation.setAnswer("-70");
 			operation.setState(1L);
+			operation.setOperId(3L);
+			operation.setContentId(3L);
 			operation.setLongDate(longDate);
 
 			operService.saveOper(operation);
@@ -63,6 +68,8 @@ public class OperController {
 			operation.setUnitId(5L);
 			operation.setAnswer("100");
 			operation.setState(1L);
+			operation.setOperId(4L);
+			operation.setContentId(4L);
 			operation.setLongDate(longDate);
 
 			operService.saveOper(operation);
@@ -70,6 +77,8 @@ public class OperController {
 			operation.setUnitId(5L);
 			operation.setAnswer("270");
 			operation.setState(1L);
+			operation.setOperId(5L);
+			operation.setContentId(5L);
 			operation.setLongDate(longDate);
 
 			operService.saveOper(operation);
@@ -77,6 +86,8 @@ public class OperController {
 			operation.setUnitId(39L);
 			operation.setAnswer("400");
 			operation.setState(1L);
+			operation.setOperId(6L);
+			operation.setContentId(6L);
 			operation.setLongDate(longDate);
 
 			operService.saveOper(operation);
@@ -84,6 +95,8 @@ public class OperController {
 			operation.setUnitId(39L);
 			operation.setAnswer("500");
 			operation.setState(1L);
+			operation.setOperId(7L);
+			operation.setContentId(7L);
 			operation.setLongDate(longDate);
 
 			operService.saveOper(operation);
@@ -91,6 +104,8 @@ public class OperController {
 			operation.setUnitId(39L);
 			operation.setAnswer("-70");
 			operation.setState(1L);
+			operation.setOperId(8L);
+			operation.setContentId(8L);
 			operation.setLongDate(longDate);
 
 			operService.saveOper(operation);
@@ -98,6 +113,8 @@ public class OperController {
 			operation.setUnitId(39L);
 			operation.setAnswer("100");
 			operation.setState(1L);
+			operation.setOperId(9L);
+			operation.setContentId(9L);
 			operation.setLongDate(longDate);
 
 			operService.saveOper(operation);
@@ -105,6 +122,8 @@ public class OperController {
 			operation.setUnitId(39L);
 			operation.setAnswer("270");
 			operation.setState(1L);
+			operation.setOperId(10L);
+			operation.setContentId(10L);
 			operation.setLongDate(longDate);
 
 			operService.saveOper(operation);
@@ -178,7 +197,7 @@ public class OperController {
 	private List<Oper> getOperList(HttpServletRequest request, Long unitId){
 		HttpSession session = request.getSession();
 //		String user = String.valueOf(session.getAttribute("user"));
-		int level = Integer.parseInt(String.valueOf(session.getAttribute("level")));
+//		int level = Integer.parseInt(String.valueOf(session.getAttribute("level")));
 
 		List<Oper> OperList;
 		if(unitId > 0){

@@ -40,37 +40,37 @@ public class CourseController {
 
 			long newId = createCourseId(0L);
 
-			System.out.println("1st currenCcourseId : " + newId);
-
+//			System.out.println("1st currenCcourseId : " + newId);
+//
 			Course course = new Course();
-			course.setCourseId(newId);
-			course.setCourseType(1L);
-			course.setCourseName("安裝教學");
-			course.setCourseSchedule(20L);
-			course.setCourseDesc("安裝軟體所需的其他輔助套件");
-			course.setCreditUnits(2L);
-//			course.setUnitList("");
-			course.setState(1L);
-			course.setLongDate(longDate);
+//			course.setCourseId(newId);
+//			course.setCourseType(1L);
+//			course.setCourseName("安裝教學");
+//			course.setCourseSchedule(20L);
+//			course.setCourseDesc("安裝軟體所需的其他輔助套件");
+//			course.setCreditUnits(2L);
+////			course.setUnitList("");
+//			course.setState(1L);
+//			course.setLongDate(longDate);
+//
+//			courseService.saveCourse(course);
 
-			courseService.saveCourse(course);
+//			newId = createCourseId(newId);
+//			System.out.println("2nd currenCcourseId : " + newId);
+//
+//			course.setCourseId(newId);
+//			course.setCourseType(1L);
+//			course.setCourseName("操作實作");
+//			course.setCourseSchedule(30L);
+//			course.setCourseDesc("實際演練操作流程");
+//			course.setCreditUnits(6L);
+////			course.setUnitList("");
+//			course.setState(1L);
+//			course.setLongDate(longDate);
+//
+//			courseService.saveCourse(course);
 
-			newId = createCourseId(newId);
-			System.out.println("2nd currenCcourseId : " + newId);
-
-			course.setCourseId(newId);
-			course.setCourseType(1L);
-			course.setCourseName("操作實作");
-			course.setCourseSchedule(30L);
-			course.setCourseDesc("實際演練操作流程");
-			course.setCreditUnits(6L);
-//			course.setUnitList("");
-			course.setState(1L);
-			course.setLongDate(longDate);
-
-			courseService.saveCourse(course);
-
-			newId = createCourseId(newId);
+//			newId = createCourseId(newId);
 			System.out.println("3rd currenCcourseId : " + newId);
 
 			course.setCourseId(newId);
@@ -85,20 +85,20 @@ public class CourseController {
 
 			courseService.saveCourse(course);
 
-			newId = createCourseId(newId);
-			System.out.println("4th currenCcourseId : " + newId);
+//			newId = createCourseId(newId);
+//			System.out.println("4th currenCcourseId : " + newId);
 
-			course.setCourseId(newId);
-			course.setCourseType(2L);
-			course.setCourseName("軟體教學");
-			course.setCourseSchedule(60L);
-			course.setCourseDesc("透過此次教學，更清楚如何實作此系統");
-			course.setCreditUnits(12L);
-//			course.setUnitList("");
-			course.setState(1L);
-			course.setLongDate(longDate);
-
-			courseService.saveCourse(course);
+//			course.setCourseId(newId);
+//			course.setCourseType(2L);
+//			course.setCourseName("軟體教學");
+//			course.setCourseSchedule(60L);
+//			course.setCourseDesc("透過此次教學，更清楚如何實作此系統");
+//			course.setCreditUnits(12L);
+////			course.setUnitList("");
+//			course.setState(1L);
+//			course.setLongDate(longDate);
+//
+//			courseService.saveCourse(course);
 
 			newId = createCourseId(newId);
 			System.out.println("5th currenCcourseId : " + newId);
