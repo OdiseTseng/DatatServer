@@ -4,11 +4,13 @@ package tw.intelegence.ncsist.sstp.config;
 //import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.ResourceLoader;
 
 import javax.sql.DataSource;
 
@@ -25,6 +27,8 @@ public class SqliteConfig {
     private String dataSourceUrl;
     @Value("${local.sqlite.init}")
     private String initDBs;
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @Bean(name= "sqliteDataSource")
     public DataSource sqliteDataSource(){
@@ -60,7 +64,7 @@ public class SqliteConfig {
 //            SqliteUtils.initCommDb(dataSource.getConnection(), key);
             for (String db: dbs){
                 key = db;
-                SqliteUtils.initCommDb(dataSource.getConnection(), key);
+                SqliteUtils.initCommDb(dataSource.getConnection(), key, resourceLoader);
             }
 
 

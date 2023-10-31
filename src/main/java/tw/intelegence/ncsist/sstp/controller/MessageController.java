@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tw.intelegence.ncsist.sstp.bean.CannedMessage;
-import tw.intelegence.ncsist.sstp.service.CannedMessageService;
+import tw.intelegence.ncsist.sstp.bean.Message;
+import tw.intelegence.ncsist.sstp.service.MessageService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,30 +18,30 @@ import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/cannedMessage")
+@RequestMapping("/message")
 @Tag(name = "8. CannedMessage api", description = "罐頭訊息")
-public class CannedMessageController {
+public class MessageController {
 
 	@Autowired
-	private CannedMessageService cannedMessageService;
+	private MessageService messageService;
 
 	@Operation(summary = "初始化",description = "無")
 	@GetMapping("/init")
 	public String init(){
 		String message = "已有內容列表。";
 
-		if(cannedMessageService.getCannedMessageList().isEmpty()){
+		if(messageService.getCannedMessageList().isEmpty()){
 			Long longDate = System.currentTimeMillis();
 			long newId = createId(0L);
 
-			CannedMessage cannedMessage = new CannedMessage();
+			Message cannedMessage = new Message();
 			cannedMessage.setCannedId(newId);
 			cannedMessage.setMessageLevel(1001L);
 			cannedMessage.setMessage("這是系統訊息");
 			cannedMessage.setState(1L);
 			cannedMessage.setLongDate(longDate);
 
-			cannedMessageService.saveCannedMessage(cannedMessage);
+			messageService.saveCannedMessage(cannedMessage);
 
 			newId = createId(newId);
 			cannedMessage.setCannedId(newId);
@@ -50,7 +50,7 @@ public class CannedMessageController {
 			cannedMessage.setState(1L);
 			cannedMessage.setLongDate(longDate);
 
-			cannedMessageService.saveCannedMessage(cannedMessage);
+			messageService.saveCannedMessage(cannedMessage);
 
 			newId = createId(newId);
 			cannedMessage.setCannedId(newId);
@@ -59,7 +59,7 @@ public class CannedMessageController {
 			cannedMessage.setState(1L);
 			cannedMessage.setLongDate(longDate);
 
-			cannedMessageService.saveCannedMessage(cannedMessage);
+			messageService.saveCannedMessage(cannedMessage);
 
 			message = "初始化罐頭訊息完成。";
 		}
@@ -71,25 +71,25 @@ public class CannedMessageController {
 	@Operation(summary = "取得新罐頭訊息ID", description = "無")
 	@GetMapping("/getNewCannedMessageId")
 	public ResponseEntity<Long> getNewCannedMessageId(){
-		Long newCannedId = createId(cannedMessageService.getCannedId());
+		Long newCannedId = createId(messageService.getCannedId());
 
 		return ResponseEntity.ok(newCannedId);
 	}
 
 	@Operation(summary = "取得所有罐頭訊息", description = "無")
 	@GetMapping("/getAllCannedMessageList")
-	public ResponseEntity<List<CannedMessage>> getAllCannedMessageList(HttpServletRequest request){
+	public ResponseEntity<List<Message>> getAllCannedMessageList(HttpServletRequest request){
 
-		List<CannedMessage> cannedMessageList = getCannedMessageList(request, 0L);
+		List<Message> messageList = getCannedMessageList(request, 0L);
 
-		return ResponseEntity.ok(cannedMessageList);
+		return ResponseEntity.ok(messageList);
 	}
 
 	@Operation(summary = "取得指定罐頭訊息", description = "無")
 	@GetMapping("/getCannedMessageListByMessageLevel/{messageLevel}")
-	public ResponseEntity<List<CannedMessage>> getCannedMessageListByMessageLevel(HttpServletRequest request, @PathVariable Long messageLevel){
+	public ResponseEntity<List<Message>> getCannedMessageListByMessageLevel(HttpServletRequest request, @PathVariable Long messageLevel){
 
-		List<CannedMessage> OperList = getCannedMessageList(request, messageLevel);
+		List<Message> OperList = getCannedMessageList(request, messageLevel);
 
 		return ResponseEntity.ok(OperList);
 	}
@@ -97,47 +97,47 @@ public class CannedMessageController {
 
 	@Operation(summary = "新增罐頭訊息", description = "無")
 	@PostMapping("/addCannedMessage")
-	public ResponseEntity<List<CannedMessage>> addCannedMessage(HttpServletRequest request, @RequestBody CannedMessage cannedMessage){
+	public ResponseEntity<List<Message>> addCannedMessage(HttpServletRequest request, @RequestBody Message message){
 
-		cannedMessageService.saveCannedMessage(cannedMessage);
+		messageService.saveCannedMessage(message);
 
-		List<CannedMessage> cannedMessageList = getCannedMessageList(request, cannedMessage.getMessageLevel());
+		List<Message> messageList = getCannedMessageList(request, message.getMessageLevel());
 
-		return ResponseEntity.ok(cannedMessageList);
+		return ResponseEntity.ok(messageList);
 	}
 
 	@Operation(summary = "更新罐頭訊息", description = "無")
 	@PostMapping("/saveCannedMessage")
-	public ResponseEntity<List<CannedMessage>> saveCannedMessage(HttpServletRequest request, @RequestBody CannedMessage cannedMessage){
+	public ResponseEntity<List<Message>> saveCannedMessage(HttpServletRequest request, @RequestBody Message message){
 
-		CannedMessage newCannedMessage = cannedMessageService.saveCannedMessage(cannedMessage);
+		Message newMessage = messageService.saveCannedMessage(message);
 
-		List<CannedMessage> cannedMessageList = getCannedMessageList(request, newCannedMessage.getMessageLevel());
+		List<Message> messageList = getCannedMessageList(request, newMessage.getMessageLevel());
 
-		return ResponseEntity.ok(cannedMessageList);
+		return ResponseEntity.ok(messageList);
 	}
 
 	@Operation(summary = "刪除罐頭訊息", description = "無")
 	@DeleteMapping("/deleteCannedMessage/{id}/{cannedId}")
-	public ResponseEntity<List<CannedMessage>> deleteCannedMessage(@PathVariable Long id, @PathVariable Long cannedId){
+	public ResponseEntity<List<Message>> deleteCannedMessage(@PathVariable Long id, @PathVariable Long cannedId){
 
-		return ResponseEntity.ok(cannedMessageService.deleteCannedMessage(id, cannedId));
+		return ResponseEntity.ok(messageService.deleteCannedMessage(id, cannedId));
 	}
 
 	//取得
-	private List<CannedMessage> getCannedMessageList(HttpServletRequest request, Long messageLevel){
+	private List<Message> getCannedMessageList(HttpServletRequest request, Long messageLevel){
 		HttpSession session = request.getSession();
 //		String user = String.valueOf(session.getAttribute("user"));
 		int level = Integer.parseInt(String.valueOf(session.getAttribute("level")));
 
-		List<CannedMessage> cannedMessageList;
+		List<Message> messageList;
 		if(messageLevel > 0){
-			cannedMessageList = cannedMessageService.getCannedMessageListByMessageLevel(messageLevel);
+			messageList = messageService.getCannedMessageListByMessageLevel(messageLevel);
 		}else{
-			cannedMessageList = cannedMessageService.getCannedMessageList();
+			messageList = messageService.getCannedMessageList();
 		}
 
-		return cannedMessageList;
+		return messageList;
 	}
 
 	private long createId(long id){

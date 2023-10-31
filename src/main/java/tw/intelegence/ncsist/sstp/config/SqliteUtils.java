@@ -2,6 +2,9 @@ package tw.intelegence.ncsist.sstp.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.ResourceUtils;
 
 import java.io.*;
@@ -11,6 +14,10 @@ import java.sql.SQLException;
 public class SqliteUtils {
 
     private static Logger logger = LoggerFactory.getLogger(SqliteUtils.class);
+
+//    SqliteUtils(){
+//        resourceLoader;
+//    }
 
     /**
      * 初始化项目db
@@ -112,7 +119,8 @@ public class SqliteUtils {
      * 初始化项目db
      * @param connection
      */
-    public static void initCommDb(Connection connection, String sqlKey){
+    public static void initCommDb(Connection connection, String sqlKey, ResourceLoader resourceLoader){
+        System.out.println("initCommDb : sqlKey;; " + sqlKey);
         //判斷TABLE是否存在
         boolean hasTable = false;
         try {
@@ -131,11 +139,25 @@ public class SqliteUtils {
             File file = null;
             try {
                 //讀取初始畫數據SQL
-                file = ResourceUtils.getFile("classpath:sql/init" + sqlKey + ".sql");
+//                ResourceUtils.get
+                Resource resource = resourceLoader.getResource("classpath:sql/init" + sqlKey + ".sql");
+                file = resource.getFile();
+//                file = ResourceUtils.getFile("classpath:sql/init" + sqlKey + ".sql");
+
             } catch (FileNotFoundException e) {
 //                e.printStackTrace();
                 logger.debug("table : " + e.getMessage());
                 System.out.println("FileNotFoundException : " + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("IOException : " + e.getMessage());
+                throw new RuntimeException(e);
+            }
+
+
+            System.out.println("file : " + file);
+
+            if(file != null){
+                System.out.println("file path: " + file.getPath());
             }
 
             //獲取SQL

@@ -21,7 +21,10 @@ public class NettyTeamService {
     @Getter
     private Map<String, String> waitingUserIdNames = new HashMap<>();
 
+    //          team              ctxId     role
     private Map<Integer, HashMap<String, Integer>> teamUsers = new HashMap<>();
+
+    private List<TeamDTO> teamDTOList = new ArrayList<>();
 
     public static String createTeam(){
 
@@ -50,6 +53,7 @@ public class NettyTeamService {
             NettyDTO nettyDTO = idNettyMaps.get(userCtxId);
             teamDTO.setCtxId(userCtxId);
             teamDTO.setTeam(0);
+            teamDTO.setRole(0);
             teamDTO.setName(nettyDTO.getName());
 
             teamDTOList.add(teamDTO);
@@ -80,7 +84,7 @@ public class NettyTeamService {
         return message;
     }
 
-    public String addTeam(String ctxId, int teamNumber, String name){
+    public String addTeam(String ctxId, int teamNumber, String name, int role){
 
         String message;
 
@@ -88,7 +92,8 @@ public class NettyTeamService {
 
         if(teamUsers.get(teamNumber) == null){
             list = new HashMap<>();
-            list.put(ctxId, 1);
+//            list.put(ctxId, 1);
+            list.put(ctxId, role);
 
             teamUsers.put(teamNumber, list);
             message = delWaitingUser(ctxId, name);
@@ -98,7 +103,8 @@ public class NettyTeamService {
             if(list.containsKey(ctxId)){
                 message = "已存在於團隊名單中";
             }else{
-                list.put(ctxId, list.size() + 1);
+//                list.put(ctxId, list.size() + 1);
+                list.put(ctxId, role);
                 message = delWaitingUser(ctxId, name);
                 message += ", 加入團隊(" + teamNumber + ")名單成功";
             }
@@ -109,21 +115,23 @@ public class NettyTeamService {
 
     public String getTeamListStr(){
 
-        List<TeamDTO> teamDTOList = new ArrayList<>();
-        TeamDTO teamDTO = new TeamDTO();
-        for (int teamKey : teamUsers.keySet()){
-            Map<String, Integer> teamUser = teamUsers.get(teamKey);
-            for(String ctxIdKey : teamUser.keySet()){
-                String name = waitingUserIdNames.get(ctxIdKey);
-                teamDTO.setCtxId(ctxIdKey);
-                teamDTO.setTeam(teamKey);
-                teamDTO.setName(name);
+        if(teamDTOList.isEmpty()){
+            TeamDTO teamDTO = new TeamDTO();
+            for (int teamKey : teamUsers.keySet()){
+                Map<String, Integer> teamUser = teamUsers.get(teamKey);
+                for(String ctxIdKey : teamUser.keySet()){
+                    String name = waitingUserIdNames.get(ctxIdKey);
+                    teamDTO.setCtxId(ctxIdKey);
+                    teamDTO.setTeam(teamKey);
+                    teamDTO.setRole(0);
+                    teamDTO.setName(name);
 
-                teamDTOList.add(teamDTO);
+                    teamDTOList.add(teamDTO);
 
-                teamDTO = new TeamDTO();
+                    teamDTO = new TeamDTO();
+                }
+
             }
-
         }
 
         return DTOParser.parseDTOsToString(teamDTOList.toArray());
@@ -132,6 +140,7 @@ public class NettyTeamService {
     public int delAllTeam(){
         String message = "已清空所有團隊";
         teamUsers = new HashMap<>();
+        teamDTOList.clear();
 
 //        sendToTeamUser(ctxId, NettyCode.TEAM_WAITING_COACH_DISPATCH);
 
@@ -151,6 +160,7 @@ public class NettyTeamService {
         if(teamDTOs != null){
             for (TeamDTO teamDTO: teamDTOs){
                 int team = teamDTO.getTeam();
+                int role = teamDTO.getRole();
                 String ctxId = teamDTO.getCtxId();
                 String name = teamDTO.getName();
 //            boolean findKey = false;
@@ -162,9 +172,9 @@ public class NettyTeamService {
                     user = teamUsers.get(team);
                     if(team != 0){
                         if(user.containsKey(ctxId)){
-                            user.replace(ctxId, team);
+                            user.replace(ctxId, role);
                         }else {
-                            user.put(ctxId, team);
+                            user.put(ctxId, role);
                         }
                     }else{
                         user.remove(ctxId);
@@ -172,7 +182,7 @@ public class NettyTeamService {
 
                 }else{
                     user = new HashMap<>();
-                    user.put(ctxId, team);
+                    user.put(ctxId, role);
                     teamUsers.put(team, user);
                 }
             }
@@ -236,6 +246,7 @@ public class NettyTeamService {
                 break;
 
             case NettyCode.TEAM_WAITING_NEXT:                   //07
+
                 msgDTO.setCmd(NettyCode.TEAM_WAITING_NEXT);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);

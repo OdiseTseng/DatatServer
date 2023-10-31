@@ -14,9 +14,9 @@ import java.util.Date;
 @NoArgsConstructor
 @Accessors(chain = true)
 @Entity
-@Table(name = "canned_message")
+@Table(name = "message")
 @Schema(name = "罐頭訊息", description = "隊伍連線時使用")
-public class CannedMessage implements Serializable{
+public class Message implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Schema(description = "Primary Key")
