@@ -62,12 +62,21 @@ public class NettyCode {
     public static  final int TEAM_WAITING_COACH_DISPATCH = 910102;
     public static final String TEAM_910102 = "TEAM_WAITING_COACH_DISPATCH";
 
-
     public static  final int TEAM_WAITING_COACH_DISPATCH_FAIL = 910103;
     public static final String TEAM_910103 = "TEAM_WAITING_COACH_DISPATCH_FAIL";
 
     public static  final int TEAM_WAITING_NEXT = 910104;
     public static final String TEAM_910104 = "TEAM_WAITING_NEXT";
+
+    public static final int TEAM_WAITING_COACH_ADD_TEAM = 90105;
+    public static final String TEAM_910105 = "TEAM_WAITING_COACH_ADD_TEAM";
+
+    public static final int TEAM_WAITING_COACH_UPD_TEAM = 90106;
+    public static final String TEAM_910106 = "TEAM_WAITING_COACH_UPD_TEAM";
+
+    public static final int TEAM_WAITING_COACH_UPD_ROLE = 90107;
+    public static final String TEAM_910107 = "TEAM_WAITING_COACH_UPD_ROLE";
+
 
     //------------------------------
     public static  final int TEAM_COURSE_STEP_WAITING = 910201;
