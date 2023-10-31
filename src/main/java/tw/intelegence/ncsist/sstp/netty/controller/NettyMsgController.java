@@ -88,7 +88,9 @@ public class NettyMsgController {
     private void sendStringMsg(String sourceCtxId, String msg){
         System.out.println("sendStringMsg ::: sourceCtxId : " + sourceCtxId + " ;;; msg : " + msg);
         ChannelHandlerContext ctx = idClients.get(sourceCtxId);
-        ctx.writeAndFlush(Unpooled.copiedBuffer(msg, CharsetUtil.UTF_8));
+        if(ctx != null){
+            ctx.writeAndFlush(Unpooled.copiedBuffer(msg, CharsetUtil.UTF_8));
+        }
     }
 
     public void sendFirstClientMsg(ChannelHandlerContext ctx, String sourceCtxId){
