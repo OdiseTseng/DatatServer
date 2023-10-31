@@ -72,8 +72,8 @@ public class OperRepository {
         if(oper.getId() == null){
 
             queryFactory.insert(qOper)
-                    .columns(qOper.operId, qOper.unitId, qOper.contentId, qOper.title, qOper.titleCH, qOper.pictureName, qOper.answer, qOper.group1, qOper.group2, qOper.group3, qOper.group4, qOper.longDate, qOper.state)
-                    .values(oper.getOperId(), oper.getUnitId(), oper.getContentId(), oper.getTitle(), oper.getTitleCH(), oper.getPictureName(), oper.getAnswer(), oper.getGroup1(), oper.getGroup2(), oper.getGroup3(), oper.getGroup4(), oper.getLongDate(), oper.getState())
+                    .columns(qOper.operId, qOper.unitId, qOper.contentId, qOper.title, qOper.titleC, qOper.pictureName, qOper.answer, qOper.group1, qOper.group2, qOper.group3, qOper.group4, qOper.longDate, qOper.state)
+                    .values(oper.getOperId(), oper.getUnitId(), oper.getContentId(), oper.getTitle(), oper.getTitleC(), oper.getPictureName(), oper.getAnswer(), oper.getGroup1(), oper.getGroup2(), oper.getGroup3(), oper.getGroup4(), oper.getLongDate(), oper.getState())
                     .execute();
 
             return queryFactory.selectFrom(qOper).orderBy(qOper.operId.desc()).fetchFirst();
@@ -85,7 +85,7 @@ public class OperRepository {
                     .set(qOper.unitId, oper.getUnitId())
                     .set(qOper.contentId, oper.getContentId())
                     .set(qOper.title, oper.getTitle())
-                    .set(qOper.titleCH, oper.getTitleCH())
+                    .set(qOper.titleC, oper.getTitleC())
                     .set(qOper.pictureName, oper.getPictureName())
                     .set(qOper.answer, oper.getAnswer())
                     .set(qOper.group1, oper.getGroup1())

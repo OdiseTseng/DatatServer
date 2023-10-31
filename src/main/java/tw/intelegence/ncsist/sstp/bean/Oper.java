@@ -35,7 +35,7 @@ public class Oper implements Serializable{
 	private String title;
 
 	@Schema(description = "題目(中文)", example = "題目1")
-	private String titleCH;
+	private String titleC;
 
 	@Schema(description = "圖片名稱", example = "圖片名稱")
 	private String pictureName;
