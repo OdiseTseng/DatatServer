@@ -71,19 +71,19 @@ public class CourseController {
 //			courseService.saveCourse(course);
 
 //			newId = createCourseId(newId);
-			System.out.println("3rd currenCcourseId : " + newId);
-
-			course.setCourseId(newId);
-			course.setCourseType(2L);
-			course.setCourseName("信號源資料庫建置");
-			course.setCourseSchedule(30L);
-			course.setCourseDesc("介紹軟體的發展方向及內容");
-			course.setCreditUnits(6L);
-//			course.setUnitList("");
-			course.setState(1L);
-			course.setLongDate(longDate);
-
-			courseService.saveCourse(course);
+//			System.out.println("3rd currenCcourseId : " + newId);
+//
+//			course.setCourseId(newId);
+//			course.setCourseType(2L);
+//			course.setCourseName("信號源資料庫建置");
+//			course.setCourseSchedule(30L);
+//			course.setCourseDesc("介紹軟體的發展方向及內容");
+//			course.setCreditUnits(6L);
+////			course.setUnitList("");
+//			course.setState(1L);
+//			course.setLongDate(longDate);
+//
+//			courseService.saveCourse(course);
 
 //			newId = createCourseId(newId);
 //			System.out.println("4th currenCcourseId : " + newId);
@@ -100,25 +100,22 @@ public class CourseController {
 //
 //			courseService.saveCourse(course);
 
-			newId = createCourseId(newId);
-			System.out.println("5th currenCcourseId : " + newId);
-
-			course.setCourseId(newId);
-			course.setCourseType(1L);
-			course.setCourseName("整合應用");
-			course.setCourseSchedule(60L);
-			course.setCourseDesc("整合應用描述");
-			course.setCreditUnits(12L);
-//			course.setUnitList("");
-			course.setState(1L);
-			course.setLongDate(longDate);
-
-			courseService.saveCourse(course);
-
-			newId = createCourseId(newId);
-			System.out.println("6th currenCcourseId : " + newId);
-
+//			newId = createCourseId(newId);
+//			System.out.println("5th currenCcourseId : " + newId);
+//
 //			course.setCourseId(newId);
+//			course.setCourseType(1L);
+//			course.setCourseName("整合應用(偵蒐)");
+//			course.setCourseSchedule(60L);
+//			course.setCourseDesc("整合應用(偵蒐)描述");
+//			course.setCreditUnits(12L);
+////			course.setUnitList("");
+//			course.setState(1L);
+//			course.setLongDate(longDate);
+//
+//			courseService.saveCourse(course);
+
+			//			course.setCourseId(newId);
 			//先暫時改成5L
 			course.setCourseId(5L);
 			course.setCourseType(1L);
@@ -131,16 +128,61 @@ public class CourseController {
 			course.setLongDate(longDate);
 
 			courseService.saveCourse(course);
+			System.out.println("3rd currenCcourseId : " + newId);
+
+			course.setCourseId(newId);
+			course.setCourseType(2L);
+			course.setCourseName("信號源資料庫建置");
+			course.setCourseSchedule(30L);
+			course.setCourseDesc("介紹軟體的發展方向及內容");
+			course.setCreditUnits(6L);
+//			course.setUnitList("");
+			course.setState(1L);
+			course.setLongDate(longDate);
+
+			courseService.saveCourse(course);
+			newId = createCourseId(newId);
+			System.out.println("6th currenCcourseId : " + newId);
+
+
+			newId = createCourseId(newId);
+			System.out.println("5th currenCcourseId : " + newId);
+
+			course.setCourseId(newId);
+			course.setCourseType(1L);
+			course.setCourseName("整合應用(偵蒐)");
+			course.setCourseSchedule(60L);
+			course.setCourseDesc("整合應用(偵蒐)描述");
+			course.setCreditUnits(12L);
+//			course.setUnitList("");
+			course.setState(1L);
+			course.setLongDate(longDate);
+
+			courseService.saveCourse(course);
 
 			newId = createCourseId(newId);
 			System.out.println("7th currenCcourseId : " + newId);
 
 			course.setCourseId(newId);
 			course.setCourseType(1L);
-			course.setCourseName("信號源資料庫建置");
+			course.setCourseName("整合應用(干擾)");
 			course.setCourseSchedule(45L);
-			course.setCourseDesc("信號源資料庫建置");
+			course.setCourseDesc("整合應用(干擾)建置");
 			course.setCreditUnits(3L);
+//			course.setUnitList("");
+			course.setState(1L);
+			course.setLongDate(longDate);
+
+			courseService.saveCourse(course);
+
+			System.out.println("3rd currenCcourseId : " + newId);
+
+			course.setCourseId(newId);
+			course.setCourseType(2L);
+			course.setCourseName("其他");
+			course.setCourseSchedule(30L);
+			course.setCourseDesc("其他內容");
+			course.setCreditUnits(6L);
 //			course.setUnitList("");
 			course.setState(1L);
 			course.setLongDate(longDate);
