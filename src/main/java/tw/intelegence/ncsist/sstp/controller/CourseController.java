@@ -128,6 +128,19 @@ public class CourseController {
 			course.setLongDate(longDate);
 
 			courseService.saveCourse(course);
+
+			//多人連線 6L
+			course.setCourseId(6L);
+			course.setCourseType(2L);
+			course.setCourseName("信號偵蒐測向");
+			course.setCourseSchedule(45L);
+			course.setCourseDesc("信號偵蒐測向描述");
+			course.setCreditUnits(9L);
+//			course.setUnitList("");
+			course.setState(1L);
+			course.setLongDate(longDate);
+
+			courseService.saveCourse(course);
 			System.out.println("3rd currenCcourseId : " + newId);
 
 			course.setCourseId(newId);
@@ -143,10 +156,6 @@ public class CourseController {
 			courseService.saveCourse(course);
 			newId = createCourseId(newId);
 			System.out.println("6th currenCcourseId : " + newId);
-
-
-			newId = createCourseId(newId);
-			System.out.println("5th currenCcourseId : " + newId);
 
 			course.setCourseId(newId);
 			course.setCourseType(1L);
