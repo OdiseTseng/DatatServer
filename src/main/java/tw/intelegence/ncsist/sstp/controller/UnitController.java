@@ -11,8 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.intelegence.ncsist.sstp.bean.Unit;
 import tw.intelegence.ncsist.sstp.service.UnitService;
+import tw.intelegence.ncsist.sstp.session.SessionContext;
 
 import java.time.LocalDate;
+import java.util.Enumeration;
 import java.util.List;
 
 
@@ -247,6 +249,15 @@ public class UnitController {
 		return ResponseEntity.ok(unitList);
 	}
 
+	@Operation(summary = "用courseId取得指定單元", description = "無")
+	@GetMapping("/getUnitsBycourseId/{courseId}")
+	public ResponseEntity<List<Unit>> getUnitsBycourseId(HttpServletRequest request, @PathVariable Long courseId){
+		System.out.println("getUnitsBycourseId ;; request : "  + request +  " ; courseId : " + courseId);
+		List<Unit> unitList = getUnitList(request, courseId);
+
+		return ResponseEntity.ok(unitList);
+	}
+
 	@Operation(summary = "取得所有單元", description = "無")
 	@GetMapping("/getAllUnit")
 	public ResponseEntity<List<Unit>> getAllUnit(HttpServletRequest request){
@@ -291,7 +302,25 @@ public class UnitController {
 
 	//取得
 	private List<Unit> getUnitList(HttpServletRequest request, Long courseId){
-		HttpSession session = request.getSession();
+		System.out.println("getUnitList");
+		String sessionId = request.getRequestedSessionId();
+		System.out.println("sessionId : " + sessionId);
+
+		sessionId = sessionId.split("=")[1];
+
+		System.out.println("sessionId : " + sessionId);
+
+		SessionContext sessionContext = SessionContext.getInstance();
+		HttpSession session = sessionContext.getSession(sessionId);
+
+		Enumeration<String> attributeNames = session.getAttributeNames();
+
+		while (attributeNames.hasMoreElements()) {
+			String attributeName = attributeNames.nextElement();
+			Object attributeValue = session.getAttribute(attributeName);
+			System.out.println("attributeName : " + attributeName + " ; attributeValue : " + attributeValue);
+		}
+
 //		String user = String.valueOf(session.getAttribute("user"));
 		int level = Integer.parseInt(String.valueOf(session.getAttribute("level")));
 

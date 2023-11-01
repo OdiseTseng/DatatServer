@@ -15,6 +15,10 @@ public class NettyDTO implements Serializable {
 
 	private Long level;
 
+	private Long grade;
+
+	private String studentUnit;
+
 	private String ip;
 
 	private Long studentId;

@@ -206,6 +206,8 @@ public class UserController {
 			nettyDTO.setUsername(user.getUsername());
 			nettyDTO.setName(user.getName());
 			nettyDTO.setLevel(user.getLevel());
+			nettyDTO.setGrade(user.getGrade());
+			nettyDTO.setStudentUnit(user.getStudentUnit());
 			nettyDTO.setIp(user.getIp());
 			nettyDTO.setStudentId(user.getStudentId());
 			nettyDTO.setStudentBatch(user.getStudentBatch());
