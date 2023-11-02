@@ -240,13 +240,11 @@ public class UnitController {
 		return ResponseEntity.ok(unitService.getUnitId());
 	}
 
-	@Operation(summary = "用unitId取得所有單元", description = "無")
-	@GetMapping("/getAllUnitByUnitId/{unitId}")
-	public ResponseEntity<List<Unit>> getAllUnitByUnitId(HttpServletRequest request, @PathVariable Long unitId){
+	@Operation(summary = "用unitId取得指定單元", description = "無")
+	@GetMapping("/getUnitByUnitId/{unitId}")
+	public ResponseEntity<Unit> getAllUnitByUnitId(HttpServletRequest request, @PathVariable Long unitId){
 
-		List<Unit> unitList = getUnitList(request, unitId);
-
-		return ResponseEntity.ok(unitList);
+		return ResponseEntity.ok(unitService.getUnitByUnitId(unitId));
 	}
 
 	@Operation(summary = "用courseId取得指定單元", description = "無")

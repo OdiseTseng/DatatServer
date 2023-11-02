@@ -54,7 +54,7 @@ public class Attendance implements Serializable{
 	@Column
 	private Long team;
 
-	@Schema(description = "角色編號", example = "001=車長，002=號手1，003=號手2，004=指揮所，005=教官")
+	@Schema(description = "角色編號", example = "001=操作手，002=通訊兵，003=車長，004=指揮所，005=教官")
 	@Column
 	private Long role;
 
