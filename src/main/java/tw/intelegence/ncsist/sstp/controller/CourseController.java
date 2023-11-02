@@ -154,6 +154,20 @@ public class CourseController {
 			course.setLongDate(longDate);
 
 			courseService.saveCourse(course);
+
+			newId = createCourseId(newId);
+			course.setCourseId(newId);
+			course.setCourseType(1L);
+			course.setCourseName("信號源資料庫建置");
+			course.setCourseSchedule(30L);
+			course.setCourseDesc("介紹軟體的發展方向及內容");
+			course.setCreditUnits(6L);
+//			course.setUnitList("");
+			course.setState(1L);
+			course.setLongDate(longDate);
+
+			courseService.saveCourse(course);
+
 			newId = createCourseId(newId);
 			System.out.println("6th currenCcourseId : " + newId);
 
@@ -188,6 +202,18 @@ public class CourseController {
 
 			course.setCourseId(newId);
 			course.setCourseType(2L);
+			course.setCourseName("其他");
+			course.setCourseSchedule(30L);
+			course.setCourseDesc("其他內容");
+			course.setCreditUnits(6L);
+//			course.setUnitList("");
+			course.setState(1L);
+			course.setLongDate(longDate);
+
+			courseService.saveCourse(course);
+
+			course.setCourseId(newId);
+			course.setCourseType(1L);
 			course.setCourseName("其他");
 			course.setCourseSchedule(30L);
 			course.setCourseDesc("其他內容");
