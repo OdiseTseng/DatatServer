@@ -158,6 +158,14 @@ public class QuizController {
 		return ResponseEntity.ok(quizList);
 	}
 
+	@Operation(summary = "取得所有測驗", description = "無")
+	@GetMapping("/getQuizListByUnitId/{unitId}")
+	public ResponseEntity<List<Quiz>> getQuizListByUnitId(HttpServletRequest request, @PathVariable Long unitId){
+
+		List<Quiz> quizList = getQuizList(request, unitId);
+
+		return ResponseEntity.ok(quizList);
+	}
 
 	@Operation(summary = "新增測驗", description = "無")
 	@PostMapping("/addQuiz")
