@@ -124,7 +124,6 @@ public class AttendanceController {
 	//取得
 	private List<Attendance> getAttendanceList(HttpServletRequest request){
 //		HttpSession session = request.getSession();
-//		String user = String.valueOf(session.getAttribute("user"));
 		String sessionId = request.getRequestedSessionId();
 		System.out.println("sessionId : " + sessionId);
 
@@ -142,6 +141,8 @@ public class AttendanceController {
 			Object attributeValue = session.getAttribute(attributeName);
 			System.out.println("attributeName : " + attributeName + " ; attributeValue : " + attributeValue);
 		}
+
+		String user = String.valueOf(session.getAttribute("user"));
 
 		int level = Integer.parseInt(String.valueOf(session.getAttribute("level")));
 
