@@ -11,8 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.intelegence.ncsist.sstp.bean.Tip;
 import tw.intelegence.ncsist.sstp.service.TipService;
+import tw.intelegence.ncsist.sstp.session.SessionContext;
 
 import java.time.LocalDate;
+import java.util.Enumeration;
 import java.util.List;
 
 
@@ -125,8 +127,26 @@ public class TipController {
 
 	//取得
 	private List<Tip> getTipList(HttpServletRequest request, Long unitId){
-		HttpSession session = request.getSession();
+//		HttpSession session = request.getSession();
 //		String user = String.valueOf(session.getAttribute("user"));
+		String sessionId = request.getRequestedSessionId();
+		System.out.println("sessionId : " + sessionId);
+
+		sessionId = sessionId.split("=")[1];
+
+		System.out.println("sessionId : " + sessionId);
+
+		SessionContext sessionContext = SessionContext.getInstance();
+		HttpSession session = sessionContext.getSession(sessionId);
+
+		Enumeration<String> attributeNames = session.getAttributeNames();
+
+		while (attributeNames.hasMoreElements()) {
+			String attributeName = attributeNames.nextElement();
+			Object attributeValue = session.getAttribute(attributeName);
+			System.out.println("attributeName : " + attributeName + " ; attributeValue : " + attributeValue);
+		}
+
 		int level = Integer.parseInt(String.valueOf(session.getAttribute("level")));
 
 		List<Tip> TipList;
