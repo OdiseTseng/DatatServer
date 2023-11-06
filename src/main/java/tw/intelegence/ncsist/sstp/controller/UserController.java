@@ -33,6 +33,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	private NettyMsgController nettyMsgController;
+
 
 	@Operation(operationId = "1",summary = "1. 初始化",description = "無")
 	@GetMapping("/init")
@@ -238,7 +240,11 @@ public class UserController {
 
 			//for demo
 //			new NettyMsgController().setIdNettyDTO(sourceId + "-" + sourceIp, nettyDTO, msgDTO);
-			new NettyMsgController().setIdNettyDTO(sourceId, nettyDTO, msgDTO);
+
+			if(nettyMsgController == null){
+				nettyMsgController = new NettyMsgController();
+			}
+			nettyMsgController.setIdNettyDTO(sourceId, nettyDTO, msgDTO);
 
 			//			NettyService.sendClientsMsg(sourceId + "-" + sourceIp, msgDTO);
 
