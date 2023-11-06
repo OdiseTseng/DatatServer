@@ -34,7 +34,7 @@ public class NettyMsgController {
 
     public void setFirstNettyIdCtx(ChannelHandlerContext ctx, String sourceCtxId){
 
-        System.out.println("setNettyIdCtx :: sourceCtxId : " + sourceCtxId);
+        System.out.println("setFirstNettyIdCtx :: sourceCtxId : " + sourceCtxId);
         HashMap<String, ChannelHandlerContext> idClients = getIdClients();
         if(idClients.containsKey(sourceCtxId)){
             idClients.replace(sourceCtxId, ctx);
@@ -228,6 +228,7 @@ public class NettyMsgController {
                         sendMsg(sourceCtxId, returnMsgDTO);
                         break;
                     case NettyCode.TEAM_WAITING_COACH_GET_ALL:
+                        System.out.println("TEAM_WAITING_COACH_GET_ALL idNettyMaps : " + idNettyMaps.size());
                         msg = nettyTeamService.getTeamListStr(idNettyMaps);
                         System.out.println("new Msg: " + msg);
                         returnMsgDTO.setMsg(msg);
