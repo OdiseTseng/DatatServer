@@ -69,9 +69,9 @@ public class UnitController {
 			unit.setDescTitle1("測驗說明");
 			unit.setDescContent1("近期有不明無線電訊號出現在桃園機場附近，要求偵蒐車到場，找出不明無線電發射地點。");
 			unit.setDescTitle2("測驗情境");
-			unit.setDescContent2("將偵蒐車移動至桃園機場，搜索50~200mhz頻段內，-90db以上的可疑的定頻訊號。");
+			unit.setDescContent2("將偵蒐車移動至桃園機場，搜索50~200MHz頻段內，-90db以上的可疑的定頻訊號。");
 			unit.setDescTitle3("測驗要點");
-			unit.setDescContent3("1．    使用搜索功能，找到50~200mhz頻段內可疑訊號\n" +
+			unit.setDescContent3("1．    使用搜索功能，找到50~200MHz頻段內可疑訊號\n" +
 					"2．    使用監視功能，獲取可疑跳頻訊號\n" +
 					"3．    報表判讀，確定可疑跳頻訊號");
 			unit.setUnitSubject("設定");
@@ -94,9 +94,9 @@ public class UnitController {
 			unit.setDescTitle1("測驗說明");
 			unit.setDescContent1("近期有不明無線電訊號出現在桃園機場附近，要求偵蒐車到場，找出不明無線電發射地點。");
 			unit.setDescTitle2("測驗情境");
-			unit.setDescContent2("將偵蒐車移動至桃園機場，搜索50~200mhz頻段內，-90db以上的可疑的定頻訊號。");
+			unit.setDescContent2("將偵蒐車移動至桃園機場，搜索50~200MHz頻段內，-90db以上的可疑的定頻訊號。");
 			unit.setDescTitle3("測驗要點");
-			unit.setDescContent3("1．    使用搜索功能，找到50~200mhz頻段內可疑訊號\n" +
+			unit.setDescContent3("1．    使用搜索功能，找到50~200MHz頻段內可疑訊號\n" +
 					"2．    使用監視功能，獲取可疑跳頻訊號\n" +
 					"3．    報表判讀，確定可疑跳頻訊號");
 			unit.setCreditUnits(6L);
@@ -119,9 +119,9 @@ public class UnitController {
 			unit.setDescTitle1("測驗說明");
 			unit.setDescContent1("近期有不明無線電訊號出現在桃園機場附近，要求偵蒐車到場，找出不明無線電發射地點。");
 			unit.setDescTitle2("測驗情境");
-			unit.setDescContent2("將偵蒐車移動至桃園機場，搜索50~200mhz頻段內，-90db以上的可疑的定頻訊號。");
+			unit.setDescContent2("將偵蒐車移動至桃園機場，搜索50~200MHz頻段內，-90db以上的可疑的定頻訊號。");
 			unit.setDescTitle3("測驗要點");
-			unit.setDescContent3("1．    使用搜索功能，找到50~200mhz頻段內可疑訊號\n" +
+			unit.setDescContent3("1．    使用搜索功能，找到50~200MHz頻段內可疑訊號\n" +
 					"2．    使用監視功能，獲取可疑跳頻訊號\n" +
 					"3．    報表判讀，確定可疑跳頻訊號");
 			unit.setCreditUnits(6L);
