@@ -82,9 +82,12 @@ public class NettyTeamService {
 //
 //                teamDTO = new TeamDTO();
 //            }
+            System.out.println("userCtxId : " + userCtxId);
             if(teamDTOMap.get(userCtxId) == null){
                 NettyDTO nettyDTO = idNettyMaps.get(userCtxId);
                 String name = nettyDTO.getName();
+
+                System.out.println("nettyDTO : " + nettyDTO);
 
                 addTeam(userCtxId, 0 , 0 , name);
             }
