@@ -82,6 +82,8 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
         System.out.println("channelActive : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
 //        super.channelActive(ctx);
+        String clientRemoteAddress = ctx.channel().remoteAddress().toString();
+        clientContextMap.put(clientRemoteAddress, ctx);//ip及ctx加入map
     }
 
     @Override
@@ -208,7 +210,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
                 System.out.println(countsForTest + ":countsForTest,,,1同學做完了，給1題目，讓2進去考試");
                 countsForTest += 1;
                 System.out.println("發送score1後,countsForTest數量為:" + countsForTest);
-//                ctx.writeAndFlush(Unpooled.copiedBuffer("score1",CharsetUtil.UTF_8));
                 for (ChannelHandlerContext clientContext : clientContextMap.values()) {
                     String clientToAllMessage = "score1";
                     ByteBuf responseByteBuf = clientContext.alloc().buffer();
@@ -219,7 +220,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             } else if (countsForTest == 4) {
                 System.out.println(countsForTest + ":countsForTest,,,1同學執行操作中，封鎖2同學行動");
                 System.out.println("發送score2後,countsForTest數量為:" + countsForTest);
-//                ctx.writeAndFlush(Unpooled.copiedBuffer("score2",CharsetUtil.UTF_8));
                 for (ChannelHandlerContext clientContext : clientContextMap.values()) {
                     String clientToAllMessage = "score2";
                     ByteBuf responseByteBuf = clientContext.alloc().buffer();
