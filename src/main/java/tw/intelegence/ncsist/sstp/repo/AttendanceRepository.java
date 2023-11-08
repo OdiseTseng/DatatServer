@@ -247,13 +247,14 @@ public class AttendanceRepository {
         if(attendance.getId() == null){
 
             queryFactory.insert(qAttendance)
-                    .columns(qAttendance.courseId, qAttendance.unitId, qAttendance.contentId, qAttendance.quizId, qAttendance.username, qAttendance.attendanceDate, qAttendance.team, qAttendance.role, qAttendance.recordScore, qAttendance.recordShot, qAttendance.score, qAttendance.longDate, qAttendance.state)
-                    .values(attendance.getCourseId(), attendance.getUnitId(), attendance.getContentId(), attendance.getQuizId(), attendance.getUsername(), attendance.getAttendanceDate(), attendance.getTeam(), attendance.getRole(), attendance.getRecordScore(), attendance.getRecordShot(), attendance.getScore(), attendance.getLongDate(), attendance.getState())
+                    .columns(qAttendance.attendanceId, qAttendance.courseId, qAttendance.unitId, qAttendance.contentId, qAttendance.quizId, qAttendance.username, qAttendance.attendanceDate, qAttendance.team, qAttendance.role, qAttendance.recordScore, qAttendance.recordShot, qAttendance.score, qAttendance.longDate, qAttendance.state)
+                    .values(attendance.getAttendanceId(), attendance.getCourseId(), attendance.getUnitId(), attendance.getContentId(), attendance.getQuizId(), attendance.getUsername(), attendance.getAttendanceDate(), attendance.getTeam(), attendance.getRole(), attendance.getRecordScore(), attendance.getRecordShot(), attendance.getScore(), attendance.getLongDate(), attendance.getState())
                     .execute();
 
         }else{
 
             queryFactory.update(qAttendance)
+                    .set(qAttendance.attendanceId, attendance.getAttendanceId())
                     .set(qAttendance.courseId, attendance.getCourseId())
                     .set(qAttendance.unitId, attendance.getUnitId())
                     .set(qAttendance.contentId, attendance.getContentId())
