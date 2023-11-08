@@ -14,6 +14,7 @@ import tw.intelegence.ncsist.sstp.service.AttendanceService;
 import tw.intelegence.ncsist.sstp.session.SessionContext;
 
 import java.time.LocalDate;
+import java.sql.Date;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -37,35 +38,61 @@ public class AttendanceController {
 		if(attendanceService.getAttendanceListByUsername("1").isEmpty() ||
 				attendanceService.getAttendanceListByUsername("2").isEmpty()) {
 			long longDate = System.currentTimeMillis();
+			Date date = new Date(longDate);
 
 			long newId = createAttendanceId(0L);
 
 			Attendance attendance = new Attendance();
 
 			attendance.setAttendanceId(newId);
-//			attendance.setCourseId();
-//			attendance.setUnitId();
-//			attendance.setContentId();
-			attendance.setUsername("1");
-//			attendance.setAttendanceDate();
+			attendance.setCourseId(202310001L);
+			attendance.setUnitId(2023001L);
+			attendance.setContentId(0L);
+			attendance.setQuizId(0L);
+			attendance.setUsername("2");
+			attendance.setAttendanceDate(date);
 			attendance.setTeam(1L);
-			attendance.setRole(1L);
+			attendance.setRole(3L);
 			attendance.setRecordScore(60L);
 			attendance.setRecordShot(""); //圖片檔案
 			attendance.setScore(60L);
 			attendance.setState(1L);
 			attendance.setLongDate(longDate);
 
-//			attendanceService.saveAttendance(attendance);
+			System.out.println("attendance : " + attendance);
+
+			attendanceService.saveAttendance(attendance);
 
 			newId = createAttendanceId(newId);
 
 			attendance.setAttendanceId(newId);
-//			attendance.setCourseId();
-//			attendance.setUnitId();
-//			attendance.setContentId();
-			attendance.setUsername("2");
-//			attendance.setAttendanceDate();
+			attendance.setCourseId(202310001L);
+			attendance.setUnitId(2023001L);
+			attendance.setContentId(0L);
+			attendance.setQuizId(0L);
+			attendance.setUsername("3");
+			attendance.setAttendanceDate(date);
+			attendance.setTeam(1L);
+			attendance.setRole(2L);
+			attendance.setRecordScore(60L);
+			attendance.setRecordShot(""); //圖片檔案
+			attendance.setScore(60L);
+			attendance.setState(1L);
+			attendance.setLongDate(longDate);
+
+			System.out.println("attendance : " + attendance);
+
+			attendanceService.saveAttendance(attendance);
+
+			newId = createAttendanceId(newId);
+
+			attendance.setAttendanceId(newId);
+			attendance.setCourseId(202310001L);
+			attendance.setUnitId(2023001L);
+			attendance.setContentId(0L);
+			attendance.setQuizId(0L);
+			attendance.setUsername("4");
+			attendance.setAttendanceDate(date);
 			attendance.setTeam(1L);
 			attendance.setRole(1L);
 			attendance.setRecordScore(60L);
@@ -74,7 +101,9 @@ public class AttendanceController {
 			attendance.setState(1L);
 			attendance.setLongDate(longDate);
 
-//			attendanceService.saveAttendance(attendance);
+			System.out.println("attendance : " + attendance);
+
+			attendanceService.saveAttendance(attendance);
 
 			message = "初始化紀錄列表完成。";
 		}
@@ -95,9 +124,13 @@ public class AttendanceController {
 	@PostMapping("/addAttendance")
 	public ResponseEntity<List<Attendance>> addAttendance(HttpServletRequest request, @RequestBody Attendance attendance){
 
-		attendanceService.saveAttendance(attendance);
 
 		List<Attendance> attendanceList = getAttendanceList(request);
+			Attendance lastAttendance = attendanceList.get(attendanceList.size() - 1);
+			Long newId = createAttendanceId(lastAttendance.getAttendanceId());
+			attendance.setAttendanceId(newId);
+		attendanceService.saveAttendance(attendance);
+
 
 		return ResponseEntity.ok(attendanceList);
 	}
@@ -105,7 +138,6 @@ public class AttendanceController {
 	@Operation(summary = "更新紀錄", description = "無")
 	@PostMapping("/saveAttendance")
 	public ResponseEntity<List<Attendance>> saveContent(HttpServletRequest request, @RequestBody Attendance attendance){
-
 		attendanceService.saveAttendance(attendance);
 
 		return ResponseEntity.ok(getAttendanceList(request));
@@ -151,6 +183,7 @@ public class AttendanceController {
 	}
 
 	private long createAttendanceId(long id){
+		System.out.println("createAttendanceId : " + id);
 		String idString = id + "";
 		LocalDate localDate = LocalDate.now();
 		long newId = 0L;
@@ -167,6 +200,7 @@ public class AttendanceController {
 			newId++;
 		}
 
+		System.out.println("newId : " + newId);
 		return newId;
 	}
 

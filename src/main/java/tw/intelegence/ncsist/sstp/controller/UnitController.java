@@ -39,7 +39,7 @@ public class UnitController {
 
 			Unit unit = new Unit();
 			unit.setUnitId(newId);
-			unit.setCourseId(202310006L);
+			unit.setCourseId(202310001L);
 			unit.setDescTitle1("測驗說明");
 			unit.setDescContent1("參數說明測驗說明");
 			unit.setDescTitle2("測驗情境");
@@ -64,12 +64,12 @@ public class UnitController {
 
 			newId = createId(newId);
 			unit.setUnitId(newId);
-			unit.setCourseId(202310006L);
+			unit.setCourseId(202310001L);
 			unit.setUnitName("信號搜索");
 			unit.setDescTitle1("測驗說明");
 			unit.setDescContent1("近期有不明無線電訊號出現在桃園機場附近，要求偵蒐車到場，找出不明無線電發射地點。");
 			unit.setDescTitle2("測驗情境");
-			unit.setDescContent2("將偵蒐車移動至桃園機場，搜索50~200MHz頻段內，-90db以上的可疑的定頻訊號。");
+			unit.setDescContent2("將偵蒐車移動至桃園機場，搜索50~200MHz頻段內，-90dBm以上的可疑的定頻訊號。");
 			unit.setDescTitle3("測驗要點");
 			unit.setDescContent3("1．    使用搜索功能，找到50~200MHz頻段內可疑訊號\n" +
 					"2．    使用監視功能，獲取可疑跳頻訊號\n" +
@@ -94,7 +94,7 @@ public class UnitController {
 			unit.setDescTitle1("測驗說明");
 			unit.setDescContent1("近期有不明無線電訊號出現在桃園機場附近，要求偵蒐車到場，找出不明無線電發射地點。");
 			unit.setDescTitle2("測驗情境");
-			unit.setDescContent2("將偵蒐車移動至桃園機場，搜索50~200MHz頻段內，-90db以上的可疑的定頻訊號。");
+			unit.setDescContent2("將偵蒐車移動至桃園機場，搜索50~200MHz頻段內，-90dBm以上的可疑的定頻訊號。");
 			unit.setDescTitle3("測驗要點");
 			unit.setDescContent3("1．    使用搜索功能，找到50~200MHz頻段內可疑訊號\n" +
 					"2．    使用監視功能，獲取可疑跳頻訊號\n" +
@@ -119,7 +119,7 @@ public class UnitController {
 			unit.setDescTitle1("測驗說明");
 			unit.setDescContent1("近期有不明無線電訊號出現在桃園機場附近，要求偵蒐車到場，找出不明無線電發射地點。");
 			unit.setDescTitle2("測驗情境");
-			unit.setDescContent2("將偵蒐車移動至桃園機場，搜索50~200MHz頻段內，-90db以上的可疑的定頻訊號。");
+			unit.setDescContent2("將偵蒐車移動至桃園機場，搜索50~200MHz頻段內，-90dBm以上的可疑的定頻訊號。");
 			unit.setDescTitle3("測驗要點");
 			unit.setDescContent3("1．    使用搜索功能，找到50~200MHz頻段內可疑訊號\n" +
 					"2．    使用監視功能，獲取可疑跳頻訊號\n" +
@@ -172,13 +172,13 @@ public class UnitController {
 			unit.setCourseId(39L);
 			unit.setUnitName("團體連線課程");
 			unit.setDescTitle1("測驗說明");
-			unit.setDescContent1("這支影片用來介紹偵蒐測項軟體-信號偵蒐測向課程 - 信號搜索單元。信號搜索是偵蒐車進到新環境的第一個動作，快速且大範圍蒐集周遭環境的定頻訊號，了解周遭的訊號環境，才能進一步判斷訊息重要性的優先順序，進行追蹤、信號監聽、跳頻信號源判斷。藉此掌握敵人之通訊或傳輸資料，並藉此獲取情報資料，掌握敵人的動向，作為戰鬥指導的依據。");
+			unit.setDescContent1("這支影片用來介紹偵蒐測向軟體-信號偵蒐測向課程 - 信號搜索單元。信號搜索是偵蒐車進到新環境的第一個動作，快速且大範圍蒐集周遭環境的定頻訊號，了解周遭的訊號環境，才能進一步判斷訊息重要性的優先順序，進行追蹤、信號監聽、跳頻信號源判斷。藉此掌握敵人之通訊或傳輸資料，並藉此獲取情報資料，掌握敵人的動向，作為戰鬥指導的依據。");
 			unit.setDescTitle2("測驗情境");
 			unit.setDescContent2("現代化戰爭中，天空充斥著無數的電子訊號，例如：廣播訊號，電視訊號以及各種無線電訊號，因此在進行信號搜索時，為了避免獲得的資料過於龐雜，需要針對搜索目標，設定限縮條件 ，並依照條件使用剔除功能， 讓搜索結果更加貼近目標，以便進行後續追踨、監視或干擾…等行動。");
 			unit.setDescTitle3("測驗要點");
 			unit.setDescContent3("本次模擬情境中，指揮部接到情報資訊，發現基隆外海疑似有敵方無人機出沒，派遣一台偵蒐車到場，搜索出無人機信號，以驗證情報真偽。\n" +
 					"\n" +
-					"1.\t使用搜索功能，找到400~500MHz頻段，「頻率間隔」12.5，「截收信號強度」-70db以上可疑定頻訊號\n" +
+					"1.\t使用搜索功能，找到400~500MHz頻段，「頻率間隔」12.5，「截收信號強度」-70dBm以上可疑定頻訊號\n" +
 					"2.\t剔除商用無人機433 MHz波道訊號\n" +
 					"3.\t剔除480～490MHz波段訊號 \n" +
 					"4.\t剔除100～270度來向角訊號\n");
@@ -200,13 +200,13 @@ public class UnitController {
 			unit.setCourseId(6L);
 			unit.setUnitName("團體連線課程");
 			unit.setDescTitle1("測驗說明");
-			unit.setDescContent1("這支影片用來介紹偵蒐測項軟體-信號偵蒐測向課程 - 信號搜索單元。信號搜索是偵蒐車進到新環境的第一個動作，快速且大範圍蒐集周遭環境的定頻訊號，了解周遭的訊號環境，才能進一步判斷訊息重要性的優先順序，進行追蹤、信號監聽、跳頻信號源判斷。藉此掌握敵人之通訊或傳輸資料，並藉此獲取情報資料，掌握敵人的動向，作為戰鬥指導的依據。");
+			unit.setDescContent1("這支影片用來介紹偵蒐測向軟體-信號偵蒐測向課程 - 信號搜索單元。信號搜索是偵蒐車進到新環境的第一個動作，快速且大範圍蒐集周遭環境的定頻訊號，了解周遭的訊號環境，才能進一步判斷訊息重要性的優先順序，進行追蹤、信號監聽、跳頻信號源判斷。藉此掌握敵人之通訊或傳輸資料，並藉此獲取情報資料，掌握敵人的動向，作為戰鬥指導的依據。");
 			unit.setDescTitle2("測驗情境");
 			unit.setDescContent2("現代化戰爭中，天空充斥著無數的電子訊號，例如：廣播訊號，電視訊號以及各種無線電訊號，因此在進行信號搜索時，為了避免獲得的資料過於龐雜，需要針對搜索目標，設定限縮條件 ，並依照條件使用剔除功能， 讓搜索結果更加貼近目標，以便進行後續追踨、監視或干擾…等行動。");
 			unit.setDescTitle3("測驗要點");
 			unit.setDescContent3("本次模擬情境中，指揮部接到情報資訊，發現基隆外海疑似有敵方無人機出沒，派遣一台偵蒐車到場，搜索出無人機信號，以驗證情報真偽。\n" +
 					"\n" +
-					"1.\t使用搜索功能，找到400~500MHz頻段，「頻率間隔」12.5，「截收信號強度」-70db以上可疑定頻訊號\n" +
+					"1.\t使用搜索功能，找到400~500MHz頻段，「頻率間隔」12.5，「截收信號強度」-70dBm以上可疑定頻訊號\n" +
 					"2.\t剔除商用無人機433 MHz波道訊號\n" +
 					"3.\t剔除480～490MHz波段訊號 \n" +
 					"4.\t剔除100～270度來向角訊號\n");
