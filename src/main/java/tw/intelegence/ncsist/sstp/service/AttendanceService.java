@@ -33,6 +33,10 @@ public class AttendanceService {
 //		return attendanceRepository.findContentByContentId(contentId);
 //	}
 
+	public List<Attendance> getAttendanceList(){
+		return attendanceRepository.findAllAttendances();
+	}
+
 	public List<Attendance> getAttendanceListByUsername(String username){
 		return attendanceRepository.findAttendancesByUsername(username);
 	}

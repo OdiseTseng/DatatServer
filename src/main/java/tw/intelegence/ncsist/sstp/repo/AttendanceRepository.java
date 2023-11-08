@@ -235,6 +235,16 @@ public class AttendanceRepository {
         return queryFactory.selectFrom(qAttendance).where(qAttendance.username.eq(username)).fetch();
     }
 
+    public List<Attendance> findAllAttendances(){
+
+        if(queryFactory == null){
+            queryFactory = new JPAQueryFactory(entityManager);
+        }
+
+        QAttendance qAttendance = QAttendance.attendance;
+        return queryFactory.selectFrom(qAttendance).fetch();
+    }
+
     public Attendance save(Attendance attendance){
 
         if(queryFactory == null){
