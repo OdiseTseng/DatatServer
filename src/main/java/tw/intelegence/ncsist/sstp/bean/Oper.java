@@ -43,6 +43,12 @@ public class Oper implements Serializable{
 	@Schema(description = "答案", example = "001, 搜索訊號...這類")
 	private String answer;
 
+	@Schema(description = "隊伍", example = "1、2、3、4、....")
+	private Long team;
+
+	@Schema(description = "席位", example = "3 = 車長、 2 = 通訊兵 、 3 = 操作手 ")
+	private Long role;
+
 	@Schema(description = "分組1", example = "1001001")
 	private Long group1;
 
