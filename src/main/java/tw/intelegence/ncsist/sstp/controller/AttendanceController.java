@@ -46,7 +46,7 @@ public class AttendanceController {
 
 			attendance.setAttendanceId(newId);
 			attendance.setCourseId(202311001L);
-			attendance.setUnitId(2023002L);
+			attendance.setUnitId(2023001L);
 			attendance.setContentId(0L);
 			attendance.setQuizId(0L);
 			attendance.setUsername("2");
@@ -55,7 +55,7 @@ public class AttendanceController {
 			attendance.setRole(3L);
 			attendance.setRecordScore(60L);
 			attendance.setRecordShot(""); //圖片檔案
-			attendance.setScore(55L);
+			attendance.setScore(60L);
 			attendance.setState(1L);
 			attendance.setLongDate(longDate);
 
@@ -66,8 +66,8 @@ public class AttendanceController {
 			newId = createAttendanceId(newId);
 
 			attendance.setAttendanceId(newId);
-			attendance.setCourseId(202311001L);
-			attendance.setUnitId(2023002L);
+			attendance.setCourseId(202310001L);
+			attendance.setUnitId(2023001L);
 			attendance.setContentId(0L);
 			attendance.setQuizId(0L);
 			attendance.setUsername("3");
@@ -76,7 +76,7 @@ public class AttendanceController {
 			attendance.setRole(2L);
 			attendance.setRecordScore(60L);
 			attendance.setRecordShot(""); //圖片檔案
-			attendance.setScore(59L);
+			attendance.setScore(60L);
 			attendance.setState(1L);
 			attendance.setLongDate(longDate);
 
@@ -88,7 +88,7 @@ public class AttendanceController {
 
 			attendance.setAttendanceId(newId);
 			attendance.setCourseId(202311001L);
-			attendance.setUnitId(2023002L);
+			attendance.setUnitId(2023001L);
 			attendance.setContentId(0L);
 			attendance.setQuizId(0L);
 			attendance.setUsername("4");
@@ -97,7 +97,7 @@ public class AttendanceController {
 			attendance.setRole(1L);
 			attendance.setRecordScore(60L);
 			attendance.setRecordShot(""); //圖片檔案
-			attendance.setScore(65L);
+			attendance.setScore(60L);
 			attendance.setState(1L);
 			attendance.setLongDate(longDate);
 
@@ -109,7 +109,7 @@ public class AttendanceController {
 
 			attendance.setAttendanceId(newId);
 			attendance.setCourseId(6L);
-			attendance.setUnitId(9L);
+			attendance.setUnitId(2023001L);
 			attendance.setContentId(0L);
 			attendance.setQuizId(0L);
 			attendance.setUsername("4");
@@ -118,7 +118,7 @@ public class AttendanceController {
 			attendance.setRole(1L);
 			attendance.setRecordScore(60L);
 			attendance.setRecordShot(""); //圖片檔案
-			attendance.setScore(77L);
+			attendance.setScore(60L);
 			attendance.setState(1L);
 			attendance.setLongDate(longDate);
 
@@ -199,8 +199,12 @@ public class AttendanceController {
 
 		int level = Integer.parseInt(String.valueOf(session.getAttribute("level")));
 
-		//新增一個取得所有人紀錄的功能ByMS使用
-		return attendanceService.getAttendanceListByUsername(user);
+		if(level != 1002){
+			//新增一個取得所有人紀錄的功能ByMS使用
+			return attendanceService.getAttendanceListByUsername(user);
+		}else{
+			return attendanceService.getAttendanceList();
+		}
 	}
 
 	private long createAttendanceId(long id){
