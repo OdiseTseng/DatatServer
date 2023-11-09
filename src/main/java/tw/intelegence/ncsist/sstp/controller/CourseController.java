@@ -198,6 +198,8 @@ public class CourseController {
 
 			courseService.saveCourse(course);
 
+
+			newId = createCourseId(newId);
 			System.out.println("3rd currenCcourseId : " + newId);
 
 			course.setCourseId(newId);
@@ -212,6 +214,8 @@ public class CourseController {
 
 			courseService.saveCourse(course);
 
+
+			newId = createCourseId(newId);
 			course.setCourseId(newId);
 			course.setCourseType(1L);
 			course.setCourseName("其他");

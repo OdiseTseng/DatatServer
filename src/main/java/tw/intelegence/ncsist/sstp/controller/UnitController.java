@@ -39,7 +39,7 @@ public class UnitController {
 
 			Unit unit = new Unit();
 			unit.setUnitId(newId);
-			unit.setCourseId(202310001L);
+			unit.setCourseId(202311001L);
 			unit.setDescTitle1("測驗說明");
 			unit.setDescContent1("參數說明測驗說明");
 			unit.setDescTitle2("測驗情境");
@@ -64,7 +64,7 @@ public class UnitController {
 
 			newId = createId(newId);
 			unit.setUnitId(newId);
-			unit.setCourseId(202310001L);
+			unit.setCourseId(202311001L);
 			unit.setUnitName("信號搜索");
 			unit.setDescTitle1("測驗說明");
 			unit.setDescContent1("近期有不明無線電訊號出現在桃園機場附近，要求偵蒐車到場，找出不明無線電發射地點。");
