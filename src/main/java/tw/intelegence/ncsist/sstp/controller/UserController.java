@@ -276,6 +276,11 @@ public class UserController {
 		return userService.deleteUser(user);
 	}
 
+	@GetMapping("/logout")
+	public ResponseEntity<String> logout(HttpSession session) {
+		session.invalidate();
+		return ResponseEntity.ok("登出成功");
+	}
 	@GetMapping("/online-controller")
 	public CompletableFuture<ResponseEntity<String>> onlineEndpoint() {
 		CompletableFuture<String> result = simulateProcessingAsync();
