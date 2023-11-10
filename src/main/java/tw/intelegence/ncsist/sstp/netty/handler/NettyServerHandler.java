@@ -1,13 +1,19 @@
 package tw.intelegence.ncsist.sstp.netty.handler;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.CharsetUtil;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import tw.intelegence.ncsist.sstp.model.MsgDTO;
 import tw.intelegence.ncsist.sstp.netty.controller.NettyMsgController;
+import tw.intelegence.ncsist.sstp.utils.func.DTOParser;
+import tw.intelegence.ncsist.sstp.utils.text.NettyCode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -98,6 +104,8 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         String sourceCtxId = ctx.channel().id().toString();
 
         System.out.println("channelInactive : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
+
+        nettyMsgController.delIdNetty(sourceCtxId);
 //        super.channelInactive(ctx);
 
     }
@@ -143,6 +151,11 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         System.out.println("channelRead : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp + " ; message : " + message);
 //
 //        super.channelRead(ctx, msg);
+        MsgDTO msgDTO = new MsgDTO();
+        msgDTO.setCmd(NettyCode.CMD_KEEP_ALIVE);
+        String msgString = DTOParser.parseDTOToString(msgDTO);
+        ctx.writeAndFlush(msgString);
+
     }
 
     @Override
@@ -160,6 +173,8 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 //        super.channelReadComplete(ctx);
     }
 
+
+
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         System.out.println("userEventTriggered : ");
@@ -172,6 +187,21 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         String sourceCtxId = ctx.channel().id().toString();
 
         System.out.println("userEventTriggered : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
+
+        if(evt instanceof IdleStateEvent){
+            IdleStateEvent idleStateEvent = (IdleStateEvent)evt;
+            if(idleStateEvent.state() == IdleState.READER_IDLE){
+                nettyMsgController.delIdNetty(sourceCtxId);
+                ctx.channel().close();
+            }else if(IdleState.READER_IDLE.equals(idleStateEvent.state())){
+                MsgDTO msgDTO = new MsgDTO();
+                msgDTO.setCmd(NettyCode.CMD_KEEP_ALIVE);
+                String msgString = DTOParser.parseDTOToString(msgDTO);
+                ctx.writeAndFlush(msgString).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
+            }else{
+                super.userEventTriggered(ctx, evt);
+            }
+        }
 //        super.userEventTriggered(ctx, evt);
     }
 
@@ -188,6 +218,8 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
         System.out.println("exceptionCaught : sourceCtxId " + sourceCtxId + " ; sourceIp : " + sourceIp);
         System.out.println("exceptionCaught : " + cause.getMessage());
+
+        nettyMsgController.delIdNetty(sourceCtxId);
 //        super.exceptionCaught(ctx, cause);
     }
     private void standAloneController(ChannelHandlerContext ctx, ByteBuf byteBuf, String clientRealMessage, String clientmessage) {

@@ -15,6 +15,9 @@ public class NettyCode {
 
     //CMD
     public static final int CMD = 90;
+
+    public static final int CMD_KEEP_ALIVE = 900000;
+    public static final String CMD_900000 = "CMD_KEEP_ALIVE";
     public static final int CMD_CONNECT = 900001;
     public static final String CMD_900001 = "CMD_CONNECT";
     public static final int CMD_DISCONNECT = 900002;
