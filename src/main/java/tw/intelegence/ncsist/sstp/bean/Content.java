@@ -34,6 +34,9 @@ public class Content implements Serializable{
 	@Schema(description = "內容排序", example = "001001001001")
 	private Long contentOrder;
 
+	@Schema(description = "對應檢核點ID", example = "001001")
+	private Long operId;
+
 	@Schema(description = "分組1", example = "1001001")
 	private Long group1;
 
