@@ -36,7 +36,7 @@ public class SqliteConfig {
         SqliteUtils.initSqliteFile(SqliteUtils.getFilePath(dataSourceUrl));
 
         //建立DB
-        DataSource dataSource  = SqliteBuilder.create().url(dataSourceUrl).build();
+        DataSource dataSource = SqliteBuilder.create().url(dataSourceUrl).build();
 
         String key = "";
 
@@ -66,7 +66,6 @@ public class SqliteConfig {
                 key = db;
                 SqliteUtils.initCommDb(dataSource.getConnection(), key, resourceLoader);
             }
-
 
         } catch (SQLException e) {
 //            e.printStackTrace();

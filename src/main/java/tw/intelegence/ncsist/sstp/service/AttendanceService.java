@@ -42,8 +42,8 @@ public class AttendanceService {
 	}
 
 	@Transactional
-	public Attendance saveAttendance(Attendance attendance){
-		return attendanceRepository.save(attendance);
+	public Attendance saveAttendance(Attendance attendance, boolean isNew){
+		return attendanceRepository.save(attendance, isNew);
 	}
 
 	@Transactional
