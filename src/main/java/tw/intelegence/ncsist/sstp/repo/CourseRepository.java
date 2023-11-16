@@ -13,16 +13,21 @@ import java.util.List;
 
 @Repository
 public class CourseRepository {
+//    @Autowired
+//    private EntityManager entityManager;
+    private final JPAQueryFactory queryFactory;
+
     @Autowired
-    private EntityManager entityManager;
-    private JPAQueryFactory queryFactory;
+    public CourseRepository(EntityManager entityManager){
+        this.queryFactory = new JPAQueryFactory(entityManager);
+    }
 
     public Long findCourseId(){
 
         Long courseId = 0L;
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QCourse qCourse = QCourse.course;
         Course course = queryFactory.selectFrom(qCourse).orderBy(qCourse.courseId.desc()).fetchFirst();
@@ -37,9 +42,9 @@ public class CourseRepository {
 
     public Course findByCourseId(long courseId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QCourse qCourse = QCourse.course;
 
@@ -48,9 +53,9 @@ public class CourseRepository {
 
     public List<Course> findAllOrderByCourseTypeAndCourseId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QCourse qCourse = QCourse.course;
 
@@ -62,9 +67,9 @@ public class CourseRepository {
 
     public List<Course> findAllOrderByCourseTypeAndCourseId(long courseType){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QCourse qCourse = QCourse.course;
 
@@ -75,9 +80,9 @@ public class CourseRepository {
 
     public Course save(Course course){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QCourse qCourse = QCourse.course;
 

@@ -26,7 +26,7 @@ public class Attendance implements Serializable{
 	@Column
 	private String username;
 
-	@Schema(description = "紀錄編號", example = "2023001")
+	@Schema(description = "紀錄編號", example = "20230000001")
 	@Column
 	private Long attendanceId;
 
@@ -50,7 +50,7 @@ public class Attendance implements Serializable{
 	@Column
 	private Date attendanceDate;
 
-	@Schema(description = "隊伍編號", example = "230101")
+	@Schema(description = "隊伍編號", example = "1")
 	@Column
 	private Long team;
 

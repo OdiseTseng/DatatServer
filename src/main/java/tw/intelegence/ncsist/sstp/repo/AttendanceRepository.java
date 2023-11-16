@@ -1,7 +1,9 @@
 package tw.intelegence.ncsist.sstp.repo;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tw.intelegence.ncsist.sstp.bean.Attendance;
@@ -11,9 +13,15 @@ import java.util.List;
 
 @Repository
 public class AttendanceRepository {
+//    @Autowired
+    private final EntityManager entityManager;
+    private final JPAQueryFactory queryFactory;
+
     @Autowired
-    private EntityManager entityManager;
-    private JPAQueryFactory queryFactory;
+    public AttendanceRepository(EntityManager entityManager){
+        this.entityManager = entityManager;
+        this.queryFactory = new JPAQueryFactory(entityManager);
+    }
 
 //    public Long findContentId(){
 //
@@ -29,9 +37,9 @@ public class AttendanceRepository {
 
     public Long findAttendanceIdByCourseId(long courseId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -46,9 +54,9 @@ public class AttendanceRepository {
 
     public Long findAttendanceIdByUnitId(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -63,9 +71,9 @@ public class AttendanceRepository {
 
     public Long findAttendanceIdByContentId(long contentId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -81,9 +89,9 @@ public class AttendanceRepository {
 
     public Long findAttendanceIdByQuizId(long quizId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -99,9 +107,9 @@ public class AttendanceRepository {
 
     public Attendance findAttendanceByCourseId(long courseId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -110,9 +118,9 @@ public class AttendanceRepository {
 
     public Attendance findAttendanceByUnitId(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -121,9 +129,9 @@ public class AttendanceRepository {
 
     public Attendance findAttendanceByContentId(long contentId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -132,9 +140,9 @@ public class AttendanceRepository {
 
     public Attendance findAttendanceByQuizId(long quizId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -143,9 +151,9 @@ public class AttendanceRepository {
 
     public List<Attendance> findAttendancesOrderByCourseId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -154,9 +162,9 @@ public class AttendanceRepository {
 
     public List<Attendance> findAttendancesOrderByUnitId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -165,9 +173,9 @@ public class AttendanceRepository {
 
     public List<Attendance> findAttendancesOrderByContentId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -176,9 +184,9 @@ public class AttendanceRepository {
 
     public List<Attendance> findAttendancesOrderByQuizId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -187,9 +195,9 @@ public class AttendanceRepository {
 
     public List<Attendance> findAttendancesByCourseId(long courseId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
         return queryFactory.selectFrom(qAttendance).where(qAttendance.courseId.eq(courseId)).fetch();
@@ -197,9 +205,9 @@ public class AttendanceRepository {
 
     public List<Attendance> findAttendancesByUnitId(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
         return queryFactory.selectFrom(qAttendance).where(qAttendance.unitId.eq(unitId)).fetch();
@@ -207,9 +215,9 @@ public class AttendanceRepository {
 
     public List<Attendance> findAttendancesByContentId(long contentId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
         return queryFactory.selectFrom(qAttendance).where(qAttendance.contentId.eq(contentId)).fetch();
@@ -217,9 +225,9 @@ public class AttendanceRepository {
 
     public List<Attendance> findAttendancesByQuizId(long quizId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
         return queryFactory.selectFrom(qAttendance).where(qAttendance.quizId.eq(quizId)).fetch();
@@ -227,9 +235,9 @@ public class AttendanceRepository {
 
     public List<Attendance> findAttendancesByUsername(String username){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
         return queryFactory.selectFrom(qAttendance).where(qAttendance.username.eq(username)).fetch();
@@ -237,28 +245,32 @@ public class AttendanceRepository {
 
     public List<Attendance> findAllAttendances(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QAttendance qAttendance = QAttendance.attendance;
         return queryFactory.selectFrom(qAttendance).fetch();
     }
 
-    public Attendance save(Attendance attendance){
+    public void save(Attendance attendance, boolean isNew){
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
 
         QAttendance qAttendance = QAttendance.attendance;
 
 //        Attendance fAttendance = queryFactory.selectFrom(qAttendance).where(qAttendance.id.eq(attendance.getId())).fetchFirst();
-        if(attendance.getId() == null){
+
+
+//        if(attendance.getId() == null){
+        if(isNew){
 
             queryFactory.insert(qAttendance)
                     .columns(qAttendance.attendanceId, qAttendance.courseId, qAttendance.unitId, qAttendance.contentId, qAttendance.quizId, qAttendance.username, qAttendance.attendanceDate, qAttendance.team, qAttendance.role, qAttendance.recordScore, qAttendance.recordShot, qAttendance.score, qAttendance.longDate, qAttendance.state)
                     .values(attendance.getAttendanceId(), attendance.getCourseId(), attendance.getUnitId(), attendance.getContentId(), attendance.getQuizId(), attendance.getUsername(), attendance.getAttendanceDate(), attendance.getTeam(), attendance.getRole(), attendance.getRecordScore(), attendance.getRecordShot(), attendance.getScore(), attendance.getLongDate(), attendance.getState())
+//                    .setLockMode(LockModeType.PESSIMISTIC_WRITE)
                     .execute();
 
         }else{
@@ -279,10 +291,15 @@ public class AttendanceRepository {
                     .set(qAttendance.longDate, attendance.getLongDate())
                     .set(qAttendance.state, attendance.getState())
                     .where(qAttendance.id.eq(attendance.getId()))
+//                    .setLockMode(LockModeType.PESSIMISTIC_WRITE)
                     .execute();
         }
 
-        return queryFactory.selectFrom(qAttendance).where(qAttendance.attendanceId.eq(attendance.getAttendanceId())).fetchFirst();
+
+//        Attendance newAttendance = queryFactory.selectFrom(qAttendance).setLockMode(LockModeType.NONE).where(qAttendance.attendanceId.eq(attendance.getAttendanceId())).fetchFirst();
+//        entityManager.lock(newAttendance, LockModeType.NONE);
+
+//        return newAttendance;
     }
 
     public List<Attendance> delete(long id, String username){

@@ -11,15 +11,19 @@ import java.util.List;
 
 @Repository
 public class TipRepository {
-    @Autowired
-    private EntityManager entityManager;
-    private JPAQueryFactory queryFactory;
+//    @Autowired
+//    private EntityManager entityManager;
+    private final JPAQueryFactory queryFactory;
+
+    public TipRepository(EntityManager entityManager){
+        this.queryFactory = new JPAQueryFactory(entityManager);
+    }
 
     public Long findTipId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QTip qTip = QTip.tip;
         Tip tip = queryFactory.selectFrom(qTip).orderBy(qTip.unitId.desc()).fetchFirst();
@@ -29,9 +33,9 @@ public class TipRepository {
 
     public Long findTipIdByUnitId(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QTip qTip = QTip.tip;
 
@@ -48,9 +52,9 @@ public class TipRepository {
 
     public Long findTipIdByContentId(long contentId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QTip qTip = QTip.tip;
 
@@ -66,9 +70,9 @@ public class TipRepository {
 
     public Tip findTipByUnitId(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QTip qTip = QTip.tip;
 
@@ -77,9 +81,9 @@ public class TipRepository {
 
     public Tip findTipByContentId(long contentId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QTip qTip = QTip.tip;
 
@@ -88,9 +92,9 @@ public class TipRepository {
 
     public List<Tip> findTipsOrderByContentId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QTip qTip = QTip.tip;
 
@@ -99,9 +103,9 @@ public class TipRepository {
 
     public List<Tip> findTipsByUnitIdOrderByContentId(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QTip qTip = QTip.tip;
 
@@ -110,9 +114,9 @@ public class TipRepository {
 
     public Tip save(Tip tip){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QTip qTip = QTip.tip;
 
@@ -143,9 +147,9 @@ public class TipRepository {
 
     public List<Tip> delete(long id, long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QTip qTip = QTip.tip;
 

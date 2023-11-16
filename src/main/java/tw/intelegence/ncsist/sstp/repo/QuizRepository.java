@@ -11,15 +11,19 @@ import java.util.List;
 
 @Repository
 public class QuizRepository {
-    @Autowired
-    private EntityManager entityManager;
-    private JPAQueryFactory queryFactory;
+//    @Autowired
+//    private EntityManager entityManager;
+    private final JPAQueryFactory queryFactory;
+
+    public QuizRepository(EntityManager entityManager){
+        this.queryFactory = new JPAQueryFactory(entityManager);
+    }
 
     public Long findByQuizId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QQuiz qQuiz = QQuiz.quiz;
         Quiz quiz = queryFactory.selectFrom(qQuiz).orderBy(qQuiz.quizId.desc()).fetchFirst();
@@ -29,9 +33,9 @@ public class QuizRepository {
 
     public Quiz findQuizByQuizId(long quizId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QQuiz qQuiz = QQuiz.quiz;
 
@@ -40,9 +44,9 @@ public class QuizRepository {
 
     public List<Quiz> findAllByUnitIdOrderByQuizId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QQuiz qQuiz = QQuiz.quiz;
         return queryFactory.selectFrom(qQuiz).orderBy(qQuiz.quizId.asc()).fetch();
@@ -50,9 +54,9 @@ public class QuizRepository {
 
     public List<Quiz> findQuizsByUnitIdOrderByQuizId(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QQuiz qQuiz = QQuiz.quiz;
         return queryFactory.selectFrom(qQuiz).where(qQuiz.unitId.eq(unitId)).orderBy(qQuiz.quizId.asc()).fetch();
@@ -60,9 +64,9 @@ public class QuizRepository {
 
     public Quiz save(Quiz quiz){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QQuiz qQuiz = QQuiz.quiz;
 
@@ -95,9 +99,9 @@ public class QuizRepository {
 
     public List<Quiz> delete(Quiz quiz){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QQuiz qQuiz = QQuiz.quiz;
 

@@ -1,9 +1,14 @@
 package tw.intelegence.ncsist.sstp.service;
 
+import jakarta.annotation.PreDestroy;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import tw.intelegence.ncsist.sstp.bean.Attendance;
+import tw.intelegence.ncsist.sstp.config.QuerydslConfig;
 import tw.intelegence.ncsist.sstp.repo.AttendanceRepository;
 
 import java.util.List;
@@ -41,14 +46,17 @@ public class AttendanceService {
 		return attendanceRepository.findAttendancesByUsername(username);
 	}
 
+//	@Async
 	@Transactional
-	public Attendance saveAttendance(Attendance attendance){
-		return attendanceRepository.save(attendance);
+	public void saveAttendance(Attendance attendance, boolean isNew){
+
+//		synchronized (attendanceRepository){
+			attendanceRepository.save(attendance, isNew);
+//		}
 	}
 
 	@Transactional
 	public List<Attendance> deleteAttendance(Long id, String username){
 		return attendanceRepository.delete(id, username);
 	}
-
 }

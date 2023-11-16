@@ -11,15 +11,20 @@ import java.util.List;
 
 @Repository
 public class OperRepository {
+//    @Autowired
+//    private EntityManager entityManager;
+    private final JPAQueryFactory queryFactory;
+
     @Autowired
-    private EntityManager entityManager;
-    private JPAQueryFactory queryFactory;
+    public OperRepository(EntityManager entityManager){
+        this.queryFactory = new JPAQueryFactory(entityManager);
+    }
 
     public Long findOperId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QOper qOper = QOper.oper;
         Oper oper = queryFactory.selectFrom(qOper).orderBy(qOper.operId.desc()).fetchFirst();
@@ -29,9 +34,9 @@ public class OperRepository {
 
     public Oper findOperByUnitId(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QOper qOper = QOper.oper;
 
@@ -40,9 +45,9 @@ public class OperRepository {
 
     public List<Oper> findAllOpersOrderByContentId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QOper qOper = QOper.oper;
 
@@ -51,9 +56,9 @@ public class OperRepository {
 
     public List<Oper> findOpersByUnitIdOrderByContentId(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QOper qOper = QOper.oper;
 
@@ -62,9 +67,9 @@ public class OperRepository {
 
     public Oper save(Oper oper){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QOper qOper = QOper.oper;
 
@@ -105,9 +110,9 @@ public class OperRepository {
 
     public List<Oper> delete(long id, long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QOper qOper = QOper.oper;
 

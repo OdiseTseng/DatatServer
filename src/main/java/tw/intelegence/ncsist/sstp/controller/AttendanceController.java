@@ -61,7 +61,7 @@ public class AttendanceController {
 
 			System.out.println("attendance : " + attendance);
 
-			attendanceService.saveAttendance(attendance);
+			attendanceService.saveAttendance(attendance, true);
 
 			newId = createAttendanceId(newId);
 
@@ -82,7 +82,7 @@ public class AttendanceController {
 
 			System.out.println("attendance : " + attendance);
 
-			attendanceService.saveAttendance(attendance);
+			attendanceService.saveAttendance(attendance, true);
 
 			newId = createAttendanceId(newId);
 
@@ -103,7 +103,7 @@ public class AttendanceController {
 
 			System.out.println("attendance : " + attendance);
 
-			attendanceService.saveAttendance(attendance);
+			attendanceService.saveAttendance(attendance, true);
 
 			newId = createAttendanceId(newId);
 
@@ -124,7 +124,49 @@ public class AttendanceController {
 
 			System.out.println("attendance : " + attendance);
 
-			attendanceService.saveAttendance(attendance);
+			attendanceService.saveAttendance(attendance, true);
+
+			newId = createAttendanceId(newId);
+
+			attendance.setAttendanceId(newId);
+			attendance.setCourseId(6L);
+			attendance.setUnitId(2023001L);
+			attendance.setContentId(0L);
+			attendance.setQuizId(0L);
+			attendance.setUsername("test@10");
+			attendance.setAttendanceDate(date);
+			attendance.setTeam(1L);
+			attendance.setRole(1L);
+			attendance.setRecordScore(60L);
+			attendance.setRecordShot(""); //圖片檔案
+			attendance.setScore(60L);
+			attendance.setState(1L);
+			attendance.setLongDate(longDate);
+
+			System.out.println("attendance : " + attendance);
+
+			attendanceService.saveAttendance(attendance, true);
+
+			newId = createAttendanceId(newId);
+
+			attendance.setAttendanceId(newId);
+			attendance.setCourseId(6L);
+			attendance.setUnitId(2023001L);
+			attendance.setContentId(0L);
+			attendance.setQuizId(0L);
+			attendance.setUsername("test@20");
+			attendance.setAttendanceDate(date);
+			attendance.setTeam(1L);
+			attendance.setRole(1L);
+			attendance.setRecordScore(60L);
+			attendance.setRecordShot(""); //圖片檔案
+			attendance.setScore(60L);
+			attendance.setState(1L);
+			attendance.setLongDate(longDate);
+
+			System.out.println("attendance : " + attendance);
+
+			attendanceService.saveAttendance(attendance, true);
 
 			message = "初始化紀錄列表完成。";
 		}
@@ -147,10 +189,20 @@ public class AttendanceController {
 
 
 		List<Attendance> attendanceList = getAttendanceList(request);
+
+		long newId;
+		if(attendanceList != null && !attendanceList.isEmpty()){
 			Attendance lastAttendance = attendanceList.get(attendanceList.size() - 1);
-			Long newId = createAttendanceId(lastAttendance.getAttendanceId());
-			attendance.setAttendanceId(newId);
-		attendanceService.saveAttendance(attendance);
+			newId = createAttendanceId(lastAttendance.getAttendanceId());
+		}else{
+			newId = createAttendanceId(0L);
+		}
+
+		attendance.setAttendanceId(newId);
+
+		attendanceService.saveAttendance(attendance, true);
+
+		attendanceList = getAttendanceList(request);
 
 
 		return ResponseEntity.ok(attendanceList);
@@ -158,8 +210,8 @@ public class AttendanceController {
 
 	@Operation(summary = "更新紀錄", description = "無")
 	@PostMapping("/saveAttendance")
-	public ResponseEntity<List<Attendance>> saveContent(HttpServletRequest request, @RequestBody Attendance attendance){
-		attendanceService.saveAttendance(attendance);
+	public ResponseEntity<List<Attendance>> saveAttendance(HttpServletRequest request, @RequestBody Attendance attendance){
+		attendanceService.saveAttendance(attendance, false);
 
 		return ResponseEntity.ok(getAttendanceList(request));
 	}
@@ -180,24 +232,32 @@ public class AttendanceController {
 		String sessionId = request.getRequestedSessionId();
 		System.out.println("sessionId : " + sessionId);
 
-		sessionId = sessionId.split("=")[1];
+		if(sessionId.split("=").length > 1){
+			sessionId = sessionId.split("=")[1];
+		}
 
 		System.out.println("sessionId : " + sessionId);
 
 		SessionContext sessionContext = SessionContext.getInstance();
 		HttpSession session = sessionContext.getSession(sessionId);
 
-		Enumeration<String> attributeNames = session.getAttributeNames();
+		int level = 0;
+		String user = "";
+		if(session != null){
 
-		while (attributeNames.hasMoreElements()) {
-			String attributeName = attributeNames.nextElement();
-			Object attributeValue = session.getAttribute(attributeName);
-			System.out.println("attributeName : " + attributeName + " ; attributeValue : " + attributeValue);
+			Enumeration<String> attributeNames = session.getAttributeNames();
+
+			while (attributeNames.hasMoreElements()) {
+				String attributeName = attributeNames.nextElement();
+				Object attributeValue = session.getAttribute(attributeName);
+				System.out.println("attributeName : " + attributeName + " ; attributeValue : " + attributeValue);
+			}
+
+			user = String.valueOf(session.getAttribute("user"));
+
+			level = Integer.parseInt(String.valueOf(session.getAttribute("level")));
+
 		}
-
-		String user = String.valueOf(session.getAttribute("user"));
-
-		int level = Integer.parseInt(String.valueOf(session.getAttribute("level")));
 
 		if(level != 1002){
 			//新增一個取得所有人紀錄的功能ByMS使用
@@ -212,12 +272,16 @@ public class AttendanceController {
 		String idString = id + "";
 		LocalDate localDate = LocalDate.now();
 		long newId = 0L;
-		long newYear = localDate.getYear() * 1000 * 100;
-		long newMonth = localDate.getMonth().getValue() * 1000;
+		long newYear = localDate.getYear() * 1000 * 10000L;
+		long newMonth = localDate.getMonth().getValue() * 1000 * 100L;
 
 		if(id > 1 && id > newYear && Long.parseLong(idString.substring(4)) > newMonth){
 			newId = ++id;
 		}
+
+		System.out.println("newId : " + newId);
+		System.out.println("newYear : " + newYear);
+		System.out.println("newMonth : " + newMonth);
 
 		if(newId < 1){
 			newId += newYear;

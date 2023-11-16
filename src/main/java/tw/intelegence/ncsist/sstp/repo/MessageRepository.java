@@ -11,15 +11,20 @@ import java.util.List;
 
 @Repository
 public class MessageRepository {
+//    @Autowired
+//    private EntityManager entityManager;
+    private final JPAQueryFactory queryFactory;
+
     @Autowired
-    private EntityManager entityManager;
-    private JPAQueryFactory queryFactory;
+    public MessageRepository(EntityManager entityManager){
+        this.queryFactory = new JPAQueryFactory(entityManager);
+    }
 
     public Long findCannedId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
 
         QMessage qMessage = QMessage.message1;
@@ -30,9 +35,9 @@ public class MessageRepository {
 
     public Message findMessageByCannedId(long cannedId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QMessage qMessage = QMessage.message1;
 
@@ -41,9 +46,9 @@ public class MessageRepository {
 
     public List<Message> findAllMessagesOrderByMessageLevelAndCannedId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QMessage qMessage = QMessage.message1;
 
@@ -52,9 +57,9 @@ public class MessageRepository {
 
     public List<Message> findMessagesByMessageLevelOrderByMessageLevelAndCannedId(long messageLevel){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QMessage qMessage = QMessage.message1;
 
@@ -63,9 +68,9 @@ public class MessageRepository {
 
     public Message save(Message message){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QMessage qMessage = QMessage.message1;
 
@@ -98,9 +103,9 @@ public class MessageRepository {
 
     public List<Message> delete(long id, long messageLevel){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QMessage qMessage = QMessage.message1;
 
