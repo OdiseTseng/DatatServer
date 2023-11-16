@@ -1,7 +1,9 @@
 package tw.intelegence.ncsist.sstp.repo;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tw.intelegence.ncsist.sstp.bean.Attendance;
@@ -12,11 +14,12 @@ import java.util.List;
 @Repository
 public class AttendanceRepository {
 //    @Autowired
-//    private EntityManager entityManager;
+    private final EntityManager entityManager;
     private final JPAQueryFactory queryFactory;
 
     @Autowired
     public AttendanceRepository(EntityManager entityManager){
+        this.entityManager = entityManager;
         this.queryFactory = new JPAQueryFactory(entityManager);
     }
 
@@ -250,11 +253,11 @@ public class AttendanceRepository {
         return queryFactory.selectFrom(qAttendance).fetch();
     }
 
-    public Attendance save(Attendance attendance, boolean isNew){
-
+    public void save(Attendance attendance, boolean isNew){
 //        if(queryFactory == null){
 //            queryFactory = new JPAQueryFactory(entityManager);
 //        }
+
 
         QAttendance qAttendance = QAttendance.attendance;
 
@@ -267,6 +270,7 @@ public class AttendanceRepository {
             queryFactory.insert(qAttendance)
                     .columns(qAttendance.attendanceId, qAttendance.courseId, qAttendance.unitId, qAttendance.contentId, qAttendance.quizId, qAttendance.username, qAttendance.attendanceDate, qAttendance.team, qAttendance.role, qAttendance.recordScore, qAttendance.recordShot, qAttendance.score, qAttendance.longDate, qAttendance.state)
                     .values(attendance.getAttendanceId(), attendance.getCourseId(), attendance.getUnitId(), attendance.getContentId(), attendance.getQuizId(), attendance.getUsername(), attendance.getAttendanceDate(), attendance.getTeam(), attendance.getRole(), attendance.getRecordScore(), attendance.getRecordShot(), attendance.getScore(), attendance.getLongDate(), attendance.getState())
+//                    .setLockMode(LockModeType.PESSIMISTIC_WRITE)
                     .execute();
 
         }else{
@@ -287,10 +291,15 @@ public class AttendanceRepository {
                     .set(qAttendance.longDate, attendance.getLongDate())
                     .set(qAttendance.state, attendance.getState())
                     .where(qAttendance.id.eq(attendance.getId()))
+//                    .setLockMode(LockModeType.PESSIMISTIC_WRITE)
                     .execute();
         }
 
-        return queryFactory.selectFrom(qAttendance).where(qAttendance.attendanceId.eq(attendance.getAttendanceId())).fetchFirst();
+
+//        Attendance newAttendance = queryFactory.selectFrom(qAttendance).setLockMode(LockModeType.NONE).where(qAttendance.attendanceId.eq(attendance.getAttendanceId())).fetchFirst();
+//        entityManager.lock(newAttendance, LockModeType.NONE);
+
+//        return newAttendance;
     }
 
     public List<Attendance> delete(long id, String username){

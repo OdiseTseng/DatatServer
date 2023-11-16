@@ -2,6 +2,7 @@ package tw.intelegence.ncsist.sstp.config;
 
 //import jakarta.activation.DataSource;
 //import jakarta.validation.Valid;
+import jakarta.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,15 @@ public class SqliteConfig {
     @Autowired
     private ResourceLoader resourceLoader;
 
+    private DataSource dataSource;
+
     @Bean(name= "sqliteDataSource")
     public DataSource sqliteDataSource(){
         //建立資料夾
         SqliteUtils.initSqliteFile(SqliteUtils.getFilePath(dataSourceUrl));
 
         //建立DB
-        DataSource dataSource = SqliteBuilder.create().url(dataSourceUrl).build();
+        dataSource = SqliteBuilder.create().url(dataSourceUrl).build();
 
         String key = "";
 
@@ -74,6 +77,23 @@ public class SqliteConfig {
         }
         return dataSource;
 
+    }
+
+
+    @PreDestroy
+    private void cleanup(){
+        System.out.println("dataSource cleanup");
+        try {
+            if(!dataSource.getConnection().isClosed()){
+
+                dataSource.getConnection().close();
+            }else{
+                System.out.println("dataSource already closed");
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException : " + e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 
 }

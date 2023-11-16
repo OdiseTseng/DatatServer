@@ -15,14 +15,19 @@ import java.util.List;
 @Repository
 public class UserRepository {
 
+//    @Autowired
+//    private EntityManager entityManager;
+    private final JPAQueryFactory queryFactory;
+
     @Autowired
-    private EntityManager entityManager;
-    private JPAQueryFactory queryFactory;
+    public UserRepository(EntityManager entityManager){
+        this.queryFactory = new JPAQueryFactory(entityManager);
+    }
 
     public User findUserByUsernameAndPassword(String username, String password) {
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUser user = QUser.user;
         return queryFactory.selectFrom(user)
@@ -31,9 +36,9 @@ public class UserRepository {
     }
 
     public User addUser(User user){
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUser qUser = QUser.user;
         queryFactory.insert(qUser)
@@ -45,9 +50,9 @@ public class UserRepository {
     }
 
     public User savePasswordByUsername(UserDTO userDTO){
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUser qUser = QUser.user;
         long success = queryFactory.update(qUser)
@@ -58,9 +63,9 @@ public class UserRepository {
     }
 
     public User saveUser(User user){
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUser qUser = QUser.user;
         User fUser = queryFactory.selectFrom(qUser).where(qUser.username.eq(user.getUsername())).fetchFirst();
@@ -92,9 +97,9 @@ public class UserRepository {
     }
 
     public User deleteUser(UserDTO userDTO){
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUser qUser = QUser.user;
         long success = queryFactory.delete(qUser)
@@ -104,9 +109,9 @@ public class UserRepository {
     }
 
     public long deleteUser(String username){
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUser qUser = QUser.user;
 
@@ -116,9 +121,9 @@ public class UserRepository {
     }
 
     public List<User> findAllUsers(){
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUser qUser = QUser.user;
         return queryFactory.selectFrom(qUser).fetch();

@@ -224,6 +224,14 @@ public class SqliteUtils {
         }else {
             logger.debug("test db is exist");
         }
+
+        try {
+            if(!connection.isClosed()){
+                connection.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void initDb(Connection connection,String... sqls){

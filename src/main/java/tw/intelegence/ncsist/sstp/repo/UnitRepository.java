@@ -13,15 +13,20 @@ import java.util.List;
 
 @Repository
 public class UnitRepository {
+//    @Autowired
+//    private EntityManager entityManager;
+    private final JPAQueryFactory queryFactory;
+
     @Autowired
-    private EntityManager entityManager;
-    private JPAQueryFactory queryFactory;
+    public UnitRepository(EntityManager entityManager){
+        this.queryFactory = new JPAQueryFactory(entityManager);
+    }
 
     public Long findByUnitId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUnit qUnit = QUnit.unit;
 
@@ -34,9 +39,9 @@ public class UnitRepository {
 
     public Unit findUnitByUnitId(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUnit qUnit = QUnit.unit;
 
@@ -45,9 +50,9 @@ public class UnitRepository {
 
     public List<Unit> findAllOrderByUnitId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUnit qUnit = QUnit.unit;
 
@@ -58,9 +63,9 @@ public class UnitRepository {
 
     public List<Unit> findByCourseIdOrderByUnitId(long courseId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUnit qUnit = QUnit.unit;
         return queryFactory.selectFrom(qUnit).where(qUnit.courseId.eq(courseId)).orderBy(qUnit.unitId.asc()).fetch();
@@ -68,9 +73,9 @@ public class UnitRepository {
 
     public Unit save(Unit unit){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUnit qUnit = QUnit.unit;
 
@@ -118,9 +123,9 @@ public class UnitRepository {
 
     public List<Unit> delete(Unit unit){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QUnit qUnit = QUnit.unit;
 

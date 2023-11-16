@@ -126,6 +126,48 @@ public class AttendanceController {
 
 			attendanceService.saveAttendance(attendance, true);
 
+			newId = createAttendanceId(newId);
+
+			attendance.setAttendanceId(newId);
+			attendance.setCourseId(6L);
+			attendance.setUnitId(2023001L);
+			attendance.setContentId(0L);
+			attendance.setQuizId(0L);
+			attendance.setUsername("test@10");
+			attendance.setAttendanceDate(date);
+			attendance.setTeam(1L);
+			attendance.setRole(1L);
+			attendance.setRecordScore(60L);
+			attendance.setRecordShot(""); //圖片檔案
+			attendance.setScore(60L);
+			attendance.setState(1L);
+			attendance.setLongDate(longDate);
+
+			System.out.println("attendance : " + attendance);
+
+			attendanceService.saveAttendance(attendance, true);
+
+			newId = createAttendanceId(newId);
+
+			attendance.setAttendanceId(newId);
+			attendance.setCourseId(6L);
+			attendance.setUnitId(2023001L);
+			attendance.setContentId(0L);
+			attendance.setQuizId(0L);
+			attendance.setUsername("test@20");
+			attendance.setAttendanceDate(date);
+			attendance.setTeam(1L);
+			attendance.setRole(1L);
+			attendance.setRecordScore(60L);
+			attendance.setRecordShot(""); //圖片檔案
+			attendance.setScore(60L);
+			attendance.setState(1L);
+			attendance.setLongDate(longDate);
+
+			System.out.println("attendance : " + attendance);
+
+			attendanceService.saveAttendance(attendance, true);
+
 			message = "初始化紀錄列表完成。";
 		}
 
@@ -230,12 +272,16 @@ public class AttendanceController {
 		String idString = id + "";
 		LocalDate localDate = LocalDate.now();
 		long newId = 0L;
-		long newYear = localDate.getYear() * 1000 * 10000;
-		long newMonth = localDate.getMonth().getValue() * 1000;
+		long newYear = localDate.getYear() * 1000 * 10000L;
+		long newMonth = localDate.getMonth().getValue() * 1000 * 100L;
 
 		if(id > 1 && id > newYear && Long.parseLong(idString.substring(4)) > newMonth){
 			newId = ++id;
 		}
+
+		System.out.println("newId : " + newId);
+		System.out.println("newYear : " + newYear);
+		System.out.println("newMonth : " + newMonth);
 
 		if(newId < 1){
 			newId += newYear;

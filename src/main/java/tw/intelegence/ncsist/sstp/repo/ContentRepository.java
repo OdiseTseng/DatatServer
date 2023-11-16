@@ -11,15 +11,20 @@ import java.util.List;
 
 @Repository
 public class ContentRepository {
+//    @Autowired
+//    private EntityManager entityManager;
+    private final JPAQueryFactory queryFactory;
+
     @Autowired
-    private EntityManager entityManager;
-    private JPAQueryFactory queryFactory;
+    public  ContentRepository(EntityManager entityManager){
+        this.queryFactory = new JPAQueryFactory(entityManager);
+    }
 
     public Long findContentId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QContent qContent = QContent.content1;
         Content content = queryFactory.selectFrom(qContent).orderBy(qContent.contentId.desc()).fetchFirst();
@@ -29,9 +34,9 @@ public class ContentRepository {
 
     public Long findContentIdByUnitId(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QContent qContent = QContent.content1;
 
@@ -47,9 +52,9 @@ public class ContentRepository {
 
     public Content findContentByContentId(long contentId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QContent qContent = QContent.content1;
 
@@ -58,9 +63,9 @@ public class ContentRepository {
 
     public List<Content> findContentsOrderByContentId(){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QContent qContent = QContent.content1;
         return queryFactory.selectFrom(qContent).orderBy(qContent.contentId.asc()).fetch();
@@ -68,9 +73,9 @@ public class ContentRepository {
 
     public List<Content> findContentsByUnitIdOrderByContentId(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QContent qContent = QContent.content1;
         return queryFactory.selectFrom(qContent).where(qContent.unitId.eq(unitId)).orderBy(qContent.contentId.asc()).fetch();
@@ -78,9 +83,9 @@ public class ContentRepository {
 
     public List<Content> findContentsByUnitIdOrderByContentOrder(long unitId){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QContent qContent = QContent.content1;
         return queryFactory.selectFrom(qContent).where(qContent.unitId.eq(unitId)).orderBy(qContent.contentOrder.asc()).fetch();
@@ -88,9 +93,9 @@ public class ContentRepository {
 
     public Content save(Content content){
 
-        if(queryFactory == null){
-            queryFactory = new JPAQueryFactory(entityManager);
-        }
+//        if(queryFactory == null){
+//            queryFactory = new JPAQueryFactory(entityManager);
+//        }
 
         QContent qContent = QContent.content1;
 
