@@ -307,19 +307,27 @@ public class NettyTeamService {
                 break;
 
             case NettyCode.TEAM_COURSE_STEP_WAITING:
-                msgDTO.setCmd(NettyCode.TEAM_COURSE_STEP_WAITING);
+//                msgDTO.setCmd(NettyCode.TEAM_COURSE_STEP_WAITING);
+                //有人傳出等待訊息
+                System.out.println("//有人傳出等待訊息");
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_COURSE_STEP_STARTING:
-                msgDTO.setCmd(NettyCode.TEAM_COURSE_STEP_STARTING);
+//                msgDTO.setCmd(NettyCode.TEAM_COURSE_STEP_STARTING);
+                System.out.println(" //學員1開始考試，讓其他人等");
+                //學員1開始考試，讓其他人等
+                msgDTO.setCmd(NettyCode.TEAM_COURSE_STEP_WAITING);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
 
             case NettyCode.TEAM_COURSE_STEP_FINISH:
-                msgDTO.setCmd(NettyCode.TEAM_COURSE_STEP_FINISH);
+//                msgDTO.setCmd(NettyCode.TEAM_COURSE_STEP_FINISH);
+                //學員1完成作業內容，讓其他人進去考試
+                System.out.println("//學員1完成作業內容，讓其他人進去考試");
+                msgDTO.setCmd(NettyCode.TEAM_COURSE_STEP_STARTING);
                 msgDTO.setFrom(from);
                 msgDTO.setMsg(msg);
                 break;
